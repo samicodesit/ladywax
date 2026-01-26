@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
+import ImageCard from "./ImageCard";
 
 export default function FeaturesSection() {
   return (
-    <section className="relative py-8 lg:py-32 overflow-hidden bg-white">
+    <section className="relative py-8 lg:py-24 overflow-hidden bg-white">
       {/* --- Spinning Graphic (Restored) --- */}
       <motion.div
         style={{ opacity: 0.12 }}
@@ -57,21 +57,14 @@ export default function FeaturesSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="hidden lg:block relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl shadow-secondary-200 grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+              className="hidden lg:block h-[500px] w-full"
             >
-              <Image
-                src="/images/den-haag-salon.png"
+              <ImageCard
+                src="/images/salon-3.png"
                 alt="LadyWax Salon Details"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 40vw"
+                text="De Ontvangstruimte."
+                className="h-full"
               />
-              {/* Overlay Badge */}
-              <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/90 backdrop-blur-md rounded-xl border border-white/50 shadow-sm">
-                <p className="font-serif text-secondary-900 text-lg italic text-center">
-                  "Hygiëne en comfort op nummer één."
-                </p>
-              </div>
             </motion.div>
           </div>
 

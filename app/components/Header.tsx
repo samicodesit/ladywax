@@ -2,14 +2,18 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { siteConfig } from "@/app/lib/config";
 import { motion, AnimatePresence } from "framer-motion";
+import { Calendar } from "lucide-react";
 
 import Image from "next/image";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +31,26 @@ export default function Header() {
       document.body.style.overflow = "unset";
     }
   }, [isMobileMenuOpen]);
+
+  const handleBookClick = (location: "amsterdam" | "theHague") => {
+    setIsMobileMenuOpen(false);
+
+    // If on homepage, scroll to appointment section (and select location)
+    if (pathname === "/") {
+      const element = document.getElementById("appointment");
+      if (element) {
+        // Dispatch event to switch tab in AppointmentSection
+        window.dispatchEvent(
+          new CustomEvent("changeLocation", { detail: location }),
+        );
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // If not on homepage, go to dedicated booking page
+      const slug = location === "amsterdam" ? "amsterdam" : "the-hague";
+      router.push(`/booking/${slug}`);
+    }
+  };
 
   return (
     <>
@@ -63,12 +87,22 @@ export default function Header() {
                   {item.name}
                 </Link>
               ))}
-              <Link
-                href="#appointment"
-                className="bg-primary-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary-700 transition-colors hover:shadow-lg transform hover:-translate-y-0.5 duration-200"
-              >
-                Book Now
-              </Link>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => handleBookClick("amsterdam")}
+                  className="group relative bg-primary-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary-700 transition-all hover:shadow-lg transform hover:-translate-y-0.5 duration-200 overflow-hidden"
+                >
+                  <span className="relative z-10 mr-2">Amsterdam</span>
+                  <Calendar className="absolute -right-1 -bottom-2 w-8 h-8 text-primary-300/40 rotate-12 group-hover:scale-110 transition-transform" />
+                </button>
+                <button
+                  onClick={() => handleBookClick("theHague")}
+                  className="group relative bg-primary-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary-700 transition-all hover:shadow-lg transform hover:-translate-y-0.5 duration-200 overflow-hidden"
+                >
+                  <span className="relative z-10 mr-2">Den Haag</span>
+                  <Calendar className="absolute -right-1 -bottom-2 w-8 h-8 text-primary-300/40 rotate-12 group-hover:scale-110 transition-transform" />
+                </button>
+              </div>
             </nav>
 
             {/* Mobile Menu Button - Larger Touch Target */}
@@ -132,15 +166,22 @@ export default function Header() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="pt-8"
+                className="pt-8 w-full flex flex-col items-center gap-4"
               >
-                <Link
-                  href="#appointment"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="inline-block w-full max-w-xs bg-primary-600 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-xl active:scale-95 transition-transform"
+                <button
+                  onClick={() => handleBookClick("amsterdam")}
+                  className="group relative w-full max-w-xs bg-primary-600 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-xl active:scale-95 transition-transform overflow-hidden"
                 >
-                  Book Appointment
-                </Link>
+                  <span className="relative z-10">Book Amsterdam</span>
+                  <Calendar className="absolute -right-2 -bottom-2 w-16 h-16 text-primary-300/40 rotate-12 group-hover:scale-110 transition-transform" />
+                </button>
+                <button
+                  onClick={() => handleBookClick("theHague")}
+                  className="group relative w-full max-w-xs bg-primary-600 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-xl active:scale-95 transition-transform overflow-hidden"
+                >
+                  <span className="relative z-10">Book Den Haag</span>
+                  <Calendar className="absolute -right-2 -bottom-2 w-16 h-16 text-primary-300/40 rotate-12 group-hover:scale-110 transition-transform" />
+                </button>
               </motion.div>
             </div>
 

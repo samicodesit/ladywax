@@ -49,14 +49,14 @@ export default function Hero() {
         Visible on screens SMALLER than XL (includes tablets, iPad Pro Portrait)
         --------------------------------------------------
       */}
-      <section className="relative w-full min-h-[85dvh] sm:min-h-[85vh] xl:hidden flex flex-col justify-end pb-8 sm:pb-20 pt-24 overflow-hidden">
+      <section className="relative w-full min-h-[85dvh] sm:min-h-[85vh] xl:hidden flex flex-col justify-end pb-8 sm:pb-20 sm:mt-[-200px] pt-24 overflow-hidden">
         {/* Background Image Container */}
         <div className="absolute inset-0 w-full h-full z-0 bg-white">
           <Image
             src="/images/inside-salon.png"
             alt="LadyWax Salon Interieur"
             fill
-            className="object-cover object-[0%_100%]"
+            className="object-cover object-[0%_100%] !top-[-50px]"
             priority
             sizes="100vw"
           />
@@ -96,15 +96,18 @@ export default function Hero() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="text-4xl sm:text-6xl font-bold text-primary-900 mb-4 sm:mb-6 font-serif leading-[1.1]"
               >
-                De Specialist <br />
-                <span className="text-primary-600">in Waxen.</span>
+                <span className="text-3xl sm:text-5xl italic">
+                  Speciaal voor Vrouwen
+                </span>
+                <br />
+                <span className="text-primary-600">Professioneel Waxen.</span>
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-base sm:text-xl text-secondary-600 mb-10 max-w-lg mx-auto leading-relaxed font-medium"
+                className="text-base sm:text-xl text-secondary-600 mb-10 max-w-xl mx-auto leading-relaxed font-medium"
               >
                 Ervaar de toonaangevende waxing studio, exclusief voor vrouwen.{" "}
                 <br className="hidden sm:block" />
@@ -263,7 +266,7 @@ export default function Hero() {
               >
                 <h1 className="font-serif text-[5.5rem] leading-[0.95] text-primary-950 tracking-tight">
                   <span className="block text-primary-900/90 font-medium italic text-[0.6em] mb-4 tracking-normal">
-                    Amsterdam & Den Haag
+                    Speciaal voor Vrouwen
                   </span>
                   <span className="block font-bold bg-clip-text text-transparent bg-gradient-to-br from-primary-900 via-primary-700 to-primary-900">
                     Professioneel Waxen.
@@ -414,11 +417,30 @@ export default function Hero() {
                 className="absolute bottom-12 -left-12 z-20"
               >
                 <div className="bg-white/90 backdrop-blur-md p-5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-white/50">
-                   <div className="flex items-center gap-2 mb-1">
-                      <span className="text-yellow-500 text-sm">★★★★★</span>
-                      <span className="font-bold text-primary-900 text-sm">4.9/5</span>
-                   </div>
-                   <p className="text-xs text-secondary-600 font-medium">op Google Reviews</p>
+                  <div className="flex items-center gap-2 mb-1">
+                    {/* add a safety icon */}
+                    <svg
+                      className="w-5 h-5 text-green-500"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12l2 2l4 -4m1.5 -4.5l.5 .5a9 9 0 1 1 -12.73 12.73a9 9 0 0 1 12.73 -12.73z"
+                      ></path>
+                    </svg>
+                    {/* <span className="text-yellow-500 text-sm">★★★★★</span> */}
+                    <span className="font-bold text-primary-900 text-sm">
+                      Gecertificeerde Specialisten
+                    </span>
+                  </div>
+                  <p className="text-xs text-secondary-600 font-medium">
+                    Veilig & Hygiënisch
+                  </p>
                 </div>
               </motion.div>
             </motion.div>

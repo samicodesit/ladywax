@@ -21,7 +21,7 @@ const locations = [
 
 export default function LocationsSection() {
   return (
-    <section className="relative py-16 lg:py-32 bg-secondary-50 overflow-hidden">
+    <section className="relative py-16 lg:py-24 bg-secondary-50 overflow-hidden">
       {/* --- Background Elements: 'Map' Theme --- */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Minimalist Map Grid Lines */}

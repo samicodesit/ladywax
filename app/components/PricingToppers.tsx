@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { siteConfig } from "../lib/config";
+import ImageCard from "./ImageCard";
 
 const prices = [
   { name: "Brazilian (Full of Shape)", price: "48,00" },
@@ -29,19 +29,14 @@ export default function PricingToppers() {
             whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="hidden lg:block relative h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl shadow-secondary-900/10"
+            className="hidden lg:block h-[600px] w-full"
           >
-            <Image
-              src="/images/inside-salon.png"
+            <ImageCard
+              src="/images/salon-2.png"
               alt="LadyWax Salon Interior"
-              fill
-              className="object-cover object-center hover:scale-105 transition-transform duration-700"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              text="Premium Verzorging."
+              className="h-full"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/60 via-transparent to-transparent opacity-60" />
-            <div className="absolute bottom-8 left-8 text-white max-w-xs">
-              <p className="font-serif text-2xl italic">"Ervaar de rust."</p>
-            </div>
           </motion.div>
 
           {/* Right Column (Content + Card) - Center on Mobile, Right on Desktop */}
@@ -72,7 +67,7 @@ export default function PricingToppers() {
               </p>
 
               {/* Decorative detail (Desktop only) */}
-              <div className="hidden lg:flex items-center gap-4 text-sm font-medium text-secondary-500">
+              {/* <div className="hidden lg:flex items-center gap-4 text-sm font-medium text-secondary-500">
                 <div className="flex -space-x-2">
                   <div className="w-8 h-8 rounded-full bg-primary-100 border-2 border-white flex items-center justify-center text-xs">
                     ★
@@ -85,7 +80,7 @@ export default function PricingToppers() {
                   </div>
                 </div>
                 <span>Beoordeeld met 4.9/5</span>
-              </div>
+              </div> */}
             </motion.div>
 
             {/* Pricing Card */}
