@@ -1,4 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LadyWax - Premium Waxing Salon Website
+
+A modern, elegant website for LadyWax - a ladies-only waxing salon with locations in Amsterdam and The Hague.
+
+## Tech Stack
+
+- **Framework**: Next.js 14+ (App Router)
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Language**: TypeScript
+- **Content Management**: Custom admin panel (simple JSON-based editing)
+
+## Project Structure
+
+```
+/app
+  /components    - Reusable React components
+  /lib          - Utilities and configuration
+  /[routes]     - Page routes (home, prices, contact, etc.)
+/public
+  /images       - Images and media assets
+  /fonts        - Custom fonts (if needed)
+/data           - Editable content (JSON files for admin panel)
+```
 
 ## Getting Started
 
@@ -6,19 +29,68 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
+
+## Features
+
+- ✅ **Landing Page**: Modern hero section with call-to-action buttons
+- ✅ **Features Section**: Highlights of what makes LadyWax special
+- ✅ **Locations**: Beautiful cards for both Amsterdam and The Hague salons
+- ✅ **Testimonials**: Customer reviews and trust badges
+- ✅ **Appointment Booking**: Integrated Salonized widget with location selector
+- ✅ **Responsive Design**: Fully optimized for mobile, tablet, and desktop
+- ✅ **Smooth Animations**: Framer Motion for elegant transitions
+- ✅ **SEO Optimized**: Proper meta tags and structure
+- ✅ **Accessibility**: ARIA labels and keyboard navigation
+- ⏳ Price list page with service categories
+- ⏳ Waxing information page
+- ⏳ Vacancies page
+- ⏳ Contact page with location details
+- ⏳ Custom admin panel for content editing
+
+## Components
+
+### Core Components
+
+- **Header**: Fixed navigation with mobile menu and smooth scroll
+- **Hero**: Full-screen hero with background image and CTAs
+- **FeaturesSection**: Grid of 6 key features with icons
+- **LocationsSection**: Interactive cards for both locations
+- **TestimonialsSection**: Customer reviews with ratings
+- **AppointmentSection**: Embedded Salonized widget with location toggle
+- **Footer**: Complete footer with all contact information
+- **ScrollToTop**: Smooth scroll-to-top button
+
+## Content Management
+
+Business owners can edit key content through a simple admin panel at `/admin` including:
+
+- Number of specialists
+- Opening hours
+- Tagline and descriptions
+- Highlights and features
+- Service descriptions
+
+## Locations
+
+**Amsterdam**
+
+- Address: Overtoom 694, 1054 JT Amsterdam
+- Phone: +31 (0)20 737 19 50
+
+**The Hague**
+
+- Address: Zuidwal aan 2-4, 2513 EE The Hague
+- Phone: +31 (0)70 799 11 67
 
 ## Learn More
 
