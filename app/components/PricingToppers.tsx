@@ -14,7 +14,7 @@ const prices = [
 
 export default function PricingToppers() {
   return (
-    <section className="bg-secondary-50 pt-4 pb-12 sm:pt-8 sm:pb-16 lg:py-24 relative z-10 overflow-hidden">
+    <section className="bg-secondary-50 pt-24 pb-12 sm:pt-8 sm:pb-16 lg:py-24 relative z-10 overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[10%] left-[5%] w-[30rem] h-[30rem] bg-secondary-100/50 rounded-full blur-3xl opacity-30" />
