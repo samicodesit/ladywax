@@ -51,11 +51,24 @@ export default function Header() {
     }
   };
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    setIsMobileMenuOpen(false);
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm py-3 backface-hidden`}
-        style={{ WebkitTransform: 'translate3d(0,0,0)' }}
+        className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm py-3`}
+        style={{ 
+          WebkitTransform: 'translate3d(0,0,0)',
+          transform: 'translate3d(0,0,0)',
+          backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden'
+        }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -63,7 +76,7 @@ export default function Header() {
             <Link
               href="/"
               className="relative z-50 flex items-center gap-2"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={handleLogoClick}
             >
               <div className="relative w-32 h-10 sm:w-40 sm:h-12">
                 <Image
