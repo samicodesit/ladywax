@@ -20,14 +20,14 @@ export default function Header() {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden"; // Often needed for robust locking
     } else {
-      document.body.style.overflow = "unset";
-      document.documentElement.style.overflow = "unset";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
 
     // Cleanup function to ensure scroll is restored if component unmounts
     return () => {
-      document.body.style.overflow = "unset";
-      document.documentElement.style.overflow = "unset";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
 
@@ -62,7 +62,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-lg py-3`}
+        className={`fixed top-0 left-0 right-0 z-50 bg-white/95 shadow-lg py-3`}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -149,7 +149,7 @@ export default function Header() {
             animate={{ opacity: 1, clipPath: "circle(150% at top right)" }}
             exit={{ opacity: 0, clipPath: "circle(0% at top right)" }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="fixed inset-0 z-40 bg-white pt-24 px-6 pb-8 md:hidden overflow-y-auto flex flex-col h-[100dvh]"
+            className="fixed inset-0 z-40 bg-white pt-24 px-6 pb-8 md:hidden overflow-y-auto flex flex-col h-[100dvh] touch-none"
           >
             <div className="flex flex-col flex-grow justify-center space-y-8 text-center pb-12">
               {siteConfig.navigation.map((item, idx) => (

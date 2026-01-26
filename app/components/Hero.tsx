@@ -49,7 +49,7 @@ export default function Hero() {
         Visible on screens SMALLER than XL (includes tablets, iPad Pro Portrait)
         --------------------------------------------------
       */}
-      <section className="relative w-full min-h-[85dvh] sm:min-h-[85vh] xl:hidden flex flex-col justify-end pb-8 sm:pb-20 sm:mt-[-200px] pt-24 overflow-hidden">
+      <section className="relative w-full min-h-[85dvh] sm:min-h-[85vh] xl:hidden flex flex-col justify-end pb-8 sm:pb-20 pt-24 overflow-hidden sm:portrait:mt-[-200px]">
         {/* Background Image Container */}
         <div className="absolute inset-0 w-full h-full z-0 bg-white">
           <Image
