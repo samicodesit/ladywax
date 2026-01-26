@@ -23,7 +23,7 @@ export default function Header() {
       document.body.style.overflow = "unset";
       document.documentElement.style.overflow = "unset";
     }
-    
+
     // Cleanup function to ensure scroll is restored if component unmounts
     return () => {
       document.body.style.overflow = "unset";
@@ -63,12 +63,6 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-lg py-3`}
-        style={{ 
-          WebkitTransform: 'translate3d(0,0,0)',
-          transform: 'translate3d(0,0,0)',
-          backfaceVisibility: 'hidden',
-          WebkitBackfaceVisibility: 'hidden'
-        }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
