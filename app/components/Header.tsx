@@ -17,17 +17,30 @@ export default function Header() {
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
+      // Store current scroll position
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden"; // Often needed for robust locking
     } else {
+      // Restore scroll position
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      }
     }
 
     // Cleanup function to ensure scroll is restored if component unmounts
     return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
 
@@ -62,7 +75,12 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 bg-white/95 shadow-lg py-3`}
+        className="fixed inset-x-0 top-0 z-50 bg-white/95 shadow-lg py-3"
+        style={{
+          willChange: 'transform',
+          transform: 'translate3d(0, 0, 0)',
+          WebkitTransform: 'translate3d(0, 0, 0)',
+        }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -84,29 +102,29 @@ export default function Header() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-4 lg:space-x-8">
               {siteConfig.navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-sm font-medium text-secondary-600 hover:text-primary-600 transition-colors"
+                  className="text-sm font-medium text-secondary-600 hover:text-primary-600 transition-colors whitespace-nowrap"
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 lg:gap-3">
                 <button
                   onClick={() => handleBookClick("amsterdam")}
-                  className="group relative bg-primary-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary-700 transition-all hover:shadow-lg transform hover:-translate-y-0.5 duration-200 overflow-hidden"
+                  className="group relative bg-primary-600 text-white px-3 lg:px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary-700 transition-all hover:shadow-lg transform hover:-translate-y-0.5 duration-200 overflow-hidden whitespace-nowrap"
                 >
-                  <span className="relative z-10 mr-2">Amsterdam</span>
+                  <span className="relative z-10 mr-1 lg:mr-2">Amsterdam</span>
                   <Calendar className="absolute -right-1 -bottom-2 w-8 h-8 text-primary-300/40 rotate-12 group-hover:scale-110 transition-transform" />
                 </button>
                 <button
                   onClick={() => handleBookClick("theHague")}
-                  className="group relative bg-primary-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary-700 transition-all hover:shadow-lg transform hover:-translate-y-0.5 duration-200 overflow-hidden"
+                  className="group relative bg-primary-600 text-white px-3 lg:px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-primary-700 transition-all hover:shadow-lg transform hover:-translate-y-0.5 duration-200 overflow-hidden whitespace-nowrap"
                 >
-                  <span className="relative z-10 mr-2">Den Haag</span>
+                  <span className="relative z-10 mr-1 lg:mr-2">Den Haag</span>
                   <Calendar className="absolute -right-1 -bottom-2 w-8 h-8 text-primary-300/40 rotate-12 group-hover:scale-110 transition-transform" />
                 </button>
               </div>
@@ -149,7 +167,14 @@ export default function Header() {
             animate={{ opacity: 1, clipPath: "circle(150% at top right)" }}
             exit={{ opacity: 0, clipPath: "circle(0% at top right)" }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="fixed inset-0 z-40 bg-white pt-24 px-6 pb-8 md:hidden overflow-y-auto flex flex-col h-[100dvh] touch-none"
+            className="fixed inset-0 z-40 bg-white pt-24 px-6 pb-8 md:hidden overflow-y-auto flex flex-col"
+            style={{
+              height: '100dvh',
+              willChange: 'transform',
+              transform: 'translate3d(0, 0, 0)',
+              WebkitTransform: 'translate3d(0, 0, 0)',
+              WebkitOverflowScrolling: 'touch',
+            }}
           >
             <div className="flex flex-col flex-grow justify-center space-y-8 text-center pb-12">
               {siteConfig.navigation.map((item, idx) => (

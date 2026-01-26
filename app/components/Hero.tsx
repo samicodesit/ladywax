@@ -107,11 +107,14 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-base sm:text-xl text-secondary-600 mb-10 max-w-xl mx-auto leading-relaxed font-medium"
+                className="text-base sm:text-xl text-secondary-600 mb-10 max-w-sm sm:max-w-xl mx-auto leading-relaxed font-medium"
               >
                 Ervaar de toonaangevende waxing studio, exclusief voor vrouwen.{" "}
                 <br className="hidden sm:block" />
+                <span className="hidden sm:inline">
+
                 Professionele behandelingen in Amsterdam & Den Haag.
+                </span>
               </motion.p>
             </div>
 

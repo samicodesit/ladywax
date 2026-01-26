@@ -96,6 +96,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Fix for mobile Safari fixed positioning */
+@supports (-webkit-touch-callout: none) {
+  body {
+    /* iOS Safari specific fixes */
+    position: relative;
+  }
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
