@@ -11,7 +11,7 @@ export const siteConfig = {
     specialistsCount: "25+",
     openingHours: "10:00 AM - 9:00 PM",
     openDays: "7 days a week",
-    tagline: "Distinctive in waxing",
+    tagline: "Onderscheidend in waxen",
     phone: "+31 (0)70 799 00 50",
   },
 

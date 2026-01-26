@@ -56,24 +56,7 @@ export default function LocationsSection() {
           />
         </svg>
 
-        {/* Compass Rose Accent */}
-        <svg
-          className="absolute bottom-10 right-10 w-32 h-32 text-secondary-200 opacity-50 hidden lg:block"
-          viewBox="0 0 100 100"
-        >
-          <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" />
-          <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" />
-          <circle cx="50" cy="50" r="40" stroke="currentColor" />
-          <text
-            x="50"
-            y="15"
-            textAnchor="middle"
-            fontSize="12"
-            fill="currentColor"
-          >
-            N
-          </text>
-        </svg>
+        {/* Compass Rose Accent - REMOVED */}
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -111,7 +94,7 @@ export default function LocationsSection() {
         </div>
 
         {/* --- Locations Cards --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {locations.map((location, i) => (
             <motion.div
               key={location.name}
@@ -119,7 +102,7 @@ export default function LocationsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.2, duration: 0.7 }}
-              className="group"
+              className={`group ${i % 2 === 1 ? "lg:mt-24" : ""}`}
             >
               <div className="relative bg-white p-3 pb-8 md:p-4 md:pb-8 rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-500">
                 {/* Image Container - Arch Shape for Variation */}

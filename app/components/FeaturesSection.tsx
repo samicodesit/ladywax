@@ -1,16 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function FeaturesSection() {
   return (
-    <section className="relative py-8 lg:py-32 overflow-x-hidden bg-white">
-      {/* --- Seamless Gradient Transition from Previous Section --- */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-secondary-50 to-white z-0 pointer-events-none" />
-
-      {/* --- Spinning Graphic (Bridging the Sections) --- */}
-      {/* Positioned comfortably to overlap the divide */}
+    <section className="relative py-8 lg:py-32 overflow-hidden bg-white">
+      {/* --- Spinning Graphic (Restored) --- */}
       <motion.div
         style={{ opacity: 0.12 }}
         animate={{ rotate: 360 }}
@@ -27,160 +24,176 @@ export default function FeaturesSection() {
         </svg>
       </motion.div>
 
-      {/* --- Rest of Background Geometry (Clipped to Section) --- */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Soft gradient orb top-right */}
-        <div className="absolute -top-[20%] -right-[10%] w-[40rem] h-[40rem] bg-gradient-to-br from-primary-50/60 to-white rounded-full blur-3xl opacity-60" />
-
-        {/* Subtle Organic Shape Bottom Left/Middle */}
-        <div className="absolute top-1/2 -left-20 w-[30rem] h-[30rem] bg-primary-50/30 rounded-full blur-[100px] mix-blend-multiply" />
-
-        {/* Elegant Abstract Curve (SVG) - Smooth flowing line */}
-        <svg
-          className="absolute top-[20%] right-0 w-full lg:w-1/2 h-[500px] text-primary-100/50 -z-10"
-          viewBox="0 0 400 400"
-          fill="none"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M400,0 C300,100 350,200 200,300 C100,360 0,350 0,400"
-            stroke="currentColor"
-            strokeWidth="1"
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
-
-        {/* Minimal Blue Geometry - Small Circle */}
-        <svg
-          className="absolute top-1/4 left-10 w-24 h-24 text-primary-200/50 hidden lg:block"
-          viewBox="0 0 100 100"
-          fill="none"
-        >
-          <circle
-            cx="50"
-            cy="50"
-            r="40"
-            stroke="currentColor"
-            strokeWidth="1"
-          />
-        </svg>
-
-        {/* Minimal Blue Geometry - Tilted Square */}
-        <svg
-          className="absolute bottom-1/4 right-[5%] w-32 h-32 text-primary-300/30 rotate-12 hidden lg:block"
-          viewBox="0 0 100 100"
-          fill="none"
-        >
-          <rect
-            x="20"
-            y="20"
-            width="60"
-            height="60"
-            stroke="currentColor"
-            strokeWidth="1"
-          />
-        </svg>
+      {/* Background Ambience */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-secondary-50 to-white opacity-80" />
+        <div className="hidden lg:block absolute right-0 top-1/3 w-[500px] h-[500px] bg-primary-50/40 rounded-full blur-[100px]" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 lg:gap-20 items-start">
-          {/* --- Headline Column (Sticky on Desktop) --- */}
-          <div className="lg:col-span-5 lg:sticky lg:top-32 self-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-16 items-start">
+          {/* --- Left Column: Sticky Header + Image Anchor --- */}
+          <div className="lg:col-span-5 lg:sticky lg:top-32 self-start flex flex-col gap-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl text-secondary-900 leading-[0.95] tracking-tight mb-8">
+              <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl text-secondary-900 leading-[0.95] tracking-tight mb-2">
                 Comfort <br />
-                <span className="italic text-secondary-400 font-light">
+                <span className="italic text-secondary-400 font-light ml-2">
                   ontmoet
                 </span>{" "}
                 <br />
                 Kwaliteit.
               </h2>
+              <div className="h-1.5 w-24 bg-primary-500 rounded-full mt-8 hidden lg:block" />
             </motion.div>
-          </div>
-          {/* --- Content Column (Breathable Layout) --- */}
-          <div className="lg:col-span-1 hidden lg:block"></div> {/* Spacer */}
-          <div className="lg:col-span-6 flex flex-col gap-12 pt-2 lg:pt-4">
-            {/* Intro Block */}
+
+            {/* Desktop Only Image Anchor - Fills the void below sticky header */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
+              className="hidden lg:block relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl shadow-secondary-200 grayscale-[20%] hover:grayscale-0 transition-all duration-700"
             >
-              <p className="text-xl md:text-2xl text-secondary-800 font-serif leading-relaxed">
-                Bij LadyWax geloven we dat ware schoonheid begint bij{" "}
-                <span className="text-primary-600 italic">zelfvertrouwen</span>.
-              </p>
+              <Image
+                src="/images/den-haag-salon.png"
+                alt="LadyWax Salon Details"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+              />
+              {/* Overlay Badge */}
+              <div className="absolute bottom-6 left-6 right-6 p-4 bg-white/90 backdrop-blur-md rounded-xl border border-white/50 shadow-sm">
+                <p className="font-serif text-secondary-900 text-lg italic text-center">
+                  "Hygiëne en comfort op nummer één."
+                </p>
+              </div>
             </motion.div>
+          </div>
 
-            {/* Feature Block 1 */}
+          {/* --- Right Column: Scrollable Content --- */}
+          <div className="lg:col-span-7 flex flex-col gap-16 lg:pt-8">
+            {/* Intro */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="pl-8 border-l-2 border-primary-100 hover:border-primary-400 transition-colors duration-500 py-1"
+              transition={{ duration: 0.8 }}
             >
-              <div className="flex items-center gap-3 mb-3">
-                <h3 className="text-sm font-bold text-secondary-900 uppercase tracking-[0.15em]">
-                  100% Vrouwvriendelijk
-                </h3>
-              </div>
-              <p className="text-secondary-500 text-lg leading-relaxed max-w-md">
-                Een veilige haven waar privacy heilig is. Onze salons zijn
-                exclusief voor en door vrouwen.
+              <p className="text-xl md:text-2xl text-secondary-800 font-serif leading-relaxed font-light">
+                LadyWax heeft WaxStores{" "}
+                <span className="text-primary-600 font-normal italic decoration-2 underline-offset-4 decoration-primary-200 underline">
+                  exclusief voor vrouwen
+                </span>{" "}
+                en verzorgt zeer professionele waxbehandelingen. Met stores in
+                Amsterdam en Den Haag staan onze gediplomeerde WaxLady's 7 dagen
+                per week voor je klaar.
               </p>
             </motion.div>
 
-            {/* Feature Block 2 */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="pl-8 border-l-2 border-primary-100 hover:border-primary-400 transition-colors duration-500 py-1"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <h3 className="text-sm font-bold text-secondary-900 uppercase tracking-[0.15em]">
-                  Expertise & Flexibiliteit
-                </h3>
-              </div>
-              <p className="text-secondary-500 text-lg leading-relaxed max-w-md">
-                Met 25+ gepassioneerde WaxLady&apos;s en ruime openingstijden
-                zorgen wij ervoor dat pure luxe altijd in jouw agenda past.
-              </p>
-            </motion.div>
+            {/* Features List */}
+            <div className="space-y-12">
+              {/* Feature 1 */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="group pl-8 border-l-2 border-primary-500 lg:border-secondary-100 lg:hover:border-primary-500 transition-colors duration-500"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="text-4xl text-primary-500 lg:text-primary-200 lg:group-hover:text-primary-500 transition-colors font-serif italic font-bold">
+                    01
+                  </span>
+                  <h3 className="text-lg font-bold text-secondary-900 uppercase tracking-widest">
+                    100% Vrouwvriendelijk
+                  </h3>
+                </div>
+                <p className="text-secondary-600 text-lg leading-relaxed">
+                  Onze salons zijn exclusief voor en door vrouwen. In elke kamer
+                  vind je een wastafel met warm water en lactacyd om je rustig
+                  op te frissen.
+                </p>
+              </motion.div>
 
-            {/* Action */}
+              {/* Feature 2 */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="group pl-8 border-l-2 border-primary-500 lg:border-secondary-100 lg:hover:border-primary-500 transition-colors duration-500"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="text-4xl text-primary-500 lg:text-primary-200 lg:group-hover:text-primary-500 transition-colors font-serif italic font-bold">
+                    02
+                  </span>
+                  <h3 className="text-lg font-bold text-secondary-900 uppercase tracking-widest">
+                    Gediplomeerde Specialisten
+                  </h3>
+                </div>
+                <p className="text-secondary-600 text-lg leading-relaxed">
+                  Meer dan 25 WaxLady's, intern opgeleid tot absolute experts.
+                  Je mag altijd je eigen vertrouwde WaxLady kiezen die jouw huid
+                  en voorkeuren kent.
+                </p>
+              </motion.div>
+
+              {/* Feature 3 */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="group pl-8 border-l-2 border-primary-500 lg:border-secondary-100 lg:hover:border-primary-500 transition-colors duration-500"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="text-4xl text-primary-500 lg:text-primary-200 lg:group-hover:text-primary-500 transition-colors font-serif italic font-bold">
+                    03
+                  </span>
+                  <h3 className="text-lg font-bold text-secondary-900 uppercase tracking-widest">
+                    Topkwaliteit Producten
+                  </h3>
+                </div>
+                <p className="text-secondary-600 text-lg leading-relaxed">
+                  Wij werken uitsluitend met de allerbeste producten en
+                  apparatuur van o.a. Lycon en Perron Rigot voor het minst
+                  pijnlijke resultaat.
+                </p>
+              </motion.div>
+            </div>
+
+            {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="pt-0"
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mt-4"
             >
               <Link
-                href="/about"
-                className="group inline-flex items-center gap-3 px-8 py-4 bg-primary-600 text-white rounded-full font-serif font-medium tracking-wide hover:bg-primary-700 transition-all duration-300 shadow-lg hover:shadow-primary-600/30 hover:-translate-y-1"
+                href="/waarom-waxen"
+                className="group inline-flex items-center gap-3 text-secondary-900 font-bold border-b-2 border-primary-500 pb-1 hover:text-primary-600 transition-colors"
               >
-                <span>Lees ons Manifesto</span>
+                <span className="uppercase tracking-widest text-sm">
+                  Waarom Waxen?
+                </span>
                 <svg
-                  className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                  className="w-5 h-5 transform group-hover:translate-x-2 transition-transform"
                   fill="none"
-                  viewBox="0 0 24 24"
                   stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={2}
+                    strokeWidth="2"
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
+                  ></path>
                 </svg>
               </Link>
             </motion.div>
