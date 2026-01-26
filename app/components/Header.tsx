@@ -62,7 +62,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm py-3`}
+        className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-lg py-3`}
         style={{ 
           WebkitTransform: 'translate3d(0,0,0)',
           transform: 'translate3d(0,0,0)',
