@@ -242,6 +242,17 @@ export default function Footer() {
               © {currentYear} {siteConfig.name}. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
+              {/* credit to website builder */}
+              <div className="flex items-center gap-2">
+                <span className="text-secondary-500">Website by</span>
+                <a
+                  href="#"
+                  rel="noopener noreferrer"
+                  className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center gap-1 hover:underline"
+                >
+                  Sami <ExternalLink size={10} />
+                </a>
+              </div>
               <span className="text-secondary-300 hidden md:block">|</span>
               <p className="text-secondary-500 font-medium italic">
                 {siteConfig.business.tagline}

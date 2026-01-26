@@ -165,6 +165,17 @@ export default function MobileFooter() {
       <p className="text-xs text-secondary-400">
         © {currentYear} {siteConfig.name}. All rights reserved.
       </p>
+
+      <div className="flex items-center gap-2 text-center justify-center mt-2">
+        <span className="text-xs text-secondary-400">Website by</span>
+        <a
+          href="#"
+          className="flex items-center gap-1 text-xs text-primary-600 font-medium hover:underline"
+        >
+          <span>Sami</span>
+          <ExternalLink size={12} className="text-primary-600" />
+        </a>
+      </div>
     </div>
   );
 }
