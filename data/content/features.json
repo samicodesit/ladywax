@@ -1,0 +1,27 @@
+{
+  "title": "Comfort",
+  "titleAccent": "ontmoet",
+  "titleBottom": "Kwaliteit.",
+  "intro": "LadyWax heeft WaxStores exclusief voor vrouwen en verzorgt zeer professionele waxbehandelingen. Met stores in Amsterdam en Den Haag staan onze gediplomeerde WaxLady's 7 dagen per week voor je klaar.",
+  "items": [
+    {
+      "number": "01",
+      "title": "100% Vrouwvriendelijk",
+      "description": "Onze salons zijn exclusief voor en door vrouwen. In elke kamer vind je een wastafel met warm water en lactacyd om je rustig op te frissen."
+    },
+    {
+      "number": "02",
+      "title": "Gediplomeerde Specialisten",
+      "description": "Meer dan 25 WaxLady's, intern opgeleid tot absolute experts. Je mag altijd je eigen vertrouwde WaxLady kiezen die jouw huid en voorkeuren kent."
+    },
+    {
+      "number": "03",
+      "title": "Topkwaliteit Producten",
+      "description": "Wij werken uitsluitend met de allerbeste producten en apparatuur van o.a. Lycon en Perron Rigot voor het minst pijnlijke resultaat."
+    }
+  ],
+  "image": "/images/salon-3.png",
+  "imageText": "De Ontvangstruimte.",
+  "ctaText": "Waarom Waxen?",
+  "ctaHref": "/waarom-waxen"
+}

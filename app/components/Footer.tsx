@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { siteConfig } from "@/app/lib/config";
+import type { NavigationData, LocationsData, BusinessData } from "@/app/lib/data";
 import {
   Facebook,
   Instagram,
@@ -13,12 +13,18 @@ import {
 } from "lucide-react";
 import MobileFooter from "./MobileFooter";
 
-export default function Footer() {
+interface FooterProps {
+  navigation: NavigationData;
+  locations: LocationsData;
+  business: BusinessData;
+}
+
+export default function Footer({ navigation, locations, business }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
     <>
-      <MobileFooter />
+      <MobileFooter navigation={navigation} locations={locations} business={business} />
       <footer className="hidden md:block bg-secondary-50 pt-16 pb-8 text-secondary-600 font-lato relative z-10">
         {/* Decorative Top Border for Distinction */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-300 via-primary-500 to-primary-300 w-full"></div>
@@ -30,14 +36,14 @@ export default function Footer() {
               <Link href="/" className="block relative w-40 h-12">
                 <Image
                   src="/images/logo.png"
-                  alt={siteConfig.name}
+                  alt={business.name}
                   fill
                   className="object-contain object-left"
                 />
               </Link>
               <div className="space-y-4">
                 <p className="max-w-xs text-sm leading-relaxed">
-                  {siteConfig.description}
+                  {business.description}
                 </p>
                 <div className="flex items-center gap-3">
                   <a
@@ -70,9 +76,9 @@ export default function Footer() {
                   <Clock size={16} className="text-primary-500" />
                   Opening Hours
                 </h4>
-                <p className="text-sm">{siteConfig.business.openDays}</p>
+                <p className="text-sm">{business.openDays}</p>
                 <p className="text-sm text-secondary-800 font-bold">
-                  {siteConfig.business.openingHours}
+                  {business.openingHours}
                 </p>
               </div>
             </div>
@@ -83,7 +89,7 @@ export default function Footer() {
                 Quick Links
               </h3>
               <ul className="space-y-3">
-                {siteConfig.navigation.map((item) => (
+                {navigation.items.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
@@ -128,16 +134,16 @@ export default function Footer() {
                   />
                   <div>
                     <p className="text-secondary-900 font-bold">
-                      {siteConfig.locations.amsterdam.name}
+                      {locations.amsterdam.name}
                     </p>
                     <p className="text-secondary-600">
-                      {siteConfig.locations.amsterdam.address}
+                      {locations.amsterdam.address}
                     </p>
                     <p className="text-secondary-600">
-                      {siteConfig.locations.amsterdam.city}
+                      {locations.amsterdam.city}
                     </p>
                     <a
-                      href={siteConfig.locations.amsterdam.mapsUrl}
+                      href={locations.amsterdam.mapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary-600 hover:text-primary-700 font-medium text-xs mt-2 inline-flex items-center gap-1 hover:underline"
@@ -153,10 +159,10 @@ export default function Footer() {
                     className="text-primary-500 shrink-0 group-hover:scale-110 transition-transform"
                   />
                   <a
-                    href={`tel:${siteConfig.locations.amsterdam.phone.replace(/\s/g, "")}`}
+                    href={`tel:${locations.amsterdam.phone.replace(/\s/g, "")}`}
                     className="hover:text-primary-600 font-medium transition-colors"
                   >
-                    {siteConfig.locations.amsterdam.phone}
+                    {locations.amsterdam.phone}
                   </a>
                 </div>
 
@@ -166,10 +172,10 @@ export default function Footer() {
                     className="text-primary-500 shrink-0 group-hover:scale-110 transition-transform"
                   />
                   <a
-                    href={`mailto:${siteConfig.locations.amsterdam.email}`}
+                    href={`mailto:${locations.amsterdam.email}`}
                     className="hover:text-primary-600 font-medium transition-colors"
                   >
-                    {siteConfig.locations.amsterdam.email}
+                    {locations.amsterdam.email}
                   </a>
                 </div>
               </div>
@@ -188,16 +194,16 @@ export default function Footer() {
                   />
                   <div>
                     <p className="text-secondary-900 font-bold">
-                      {siteConfig.locations.theHague.name}
+                      {locations.theHague.name}
                     </p>
                     <p className="text-secondary-600">
-                      {siteConfig.locations.theHague.address}
+                      {locations.theHague.address}
                     </p>
                     <p className="text-secondary-600">
-                      {siteConfig.locations.theHague.city}
+                      {locations.theHague.city}
                     </p>
                     <a
-                      href={siteConfig.locations.theHague.mapsUrl}
+                      href={locations.theHague.mapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary-600 hover:text-primary-700 font-medium text-xs mt-2 inline-flex items-center gap-1 hover:underline"
@@ -213,10 +219,10 @@ export default function Footer() {
                     className="text-primary-500 shrink-0 group-hover:scale-110 transition-transform"
                   />
                   <a
-                    href={`tel:${siteConfig.locations.theHague.phone.replace(/\s/g, "")}`}
+                    href={`tel:${locations.theHague.phone.replace(/\s/g, "")}`}
                     className="hover:text-primary-600 font-medium transition-colors"
                   >
-                    {siteConfig.locations.theHague.phone}
+                    {locations.theHague.phone}
                   </a>
                 </div>
 
@@ -226,10 +232,10 @@ export default function Footer() {
                     className="text-primary-500 shrink-0 group-hover:scale-110 transition-transform"
                   />
                   <a
-                    href={`mailto:${siteConfig.locations.theHague.email}`}
+                    href={`mailto:${locations.theHague.email}`}
                     className="hover:text-primary-600 font-medium transition-colors"
                   >
-                    {siteConfig.locations.theHague.email}
+                    {locations.theHague.email}
                   </a>
                 </div>
               </div>
@@ -239,7 +245,7 @@ export default function Footer() {
           {/* Bottom Bar */}
           <div className="border-t border-secondary-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
             <p className="text-secondary-500">
-              © {currentYear} {siteConfig.name}. All rights reserved.
+              © {currentYear} {business.name}. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               {/* credit to website builder */}
@@ -255,7 +261,7 @@ export default function Footer() {
               </div>
               <span className="text-secondary-300 hidden md:block">|</span>
               <p className="text-secondary-500 font-medium italic">
-                {siteConfig.business.tagline}
+                {business.tagline}
               </p>
             </div>
           </div>

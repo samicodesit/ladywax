@@ -2,24 +2,28 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { siteConfig } from "@/app/lib/config";
+import type { LocationsData, HighlightsData } from "@/app/lib/data";
 
-const locations = [
-  {
-    ...siteConfig.locations.amsterdam,
-    image: "/images/amsterdam-salon.png",
-    id: "01",
-    short: "AMS",
-  },
-  {
-    ...siteConfig.locations.theHague,
-    image: "/images/den-haag-salon.png",
-    id: "02",
-    short: "DH",
-  },
-];
+interface LocationsSectionProps {
+  data: LocationsData;
+  highlights?: HighlightsData;
+}
 
-export default function LocationsSection() {
+export default function LocationsSection({ data }: LocationsSectionProps) {
+  const locations = [
+    {
+      ...data.amsterdam,
+      image: "/images/amsterdam-salon.png",
+      id: "01",
+      short: "AMS",
+    },
+    {
+      ...data.theHague,
+      image: "/images/den-haag-salon.png",
+      id: "02",
+      short: "DH",
+    },
+  ];
   return (
     <section className="relative py-16 lg:py-24 bg-secondary-50 overflow-hidden">
       {/* --- Background Elements: 'Map' Theme --- */}

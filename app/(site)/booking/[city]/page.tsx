@@ -1,4 +1,4 @@
-import { siteConfig } from "@/app/lib/config";
+import { getLocationsData } from "@/app/lib/data";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -26,14 +26,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { city } = await params;
   const slug = city as CitySlug;
   const configKey = locationMap[slug];
+  const locations = await getLocationsData();
 
-  if (!configKey) {
+  if (!configKey || !locations[configKey as keyof typeof locations]) {
     return {
       title: "Location Not Found",
     };
   }
 
-  const location = siteConfig.locations[configKey];
+  const location = locations[configKey as "amsterdam" | "theHague"];
 
   return {
     title: `Book Appointment - ${location.name} | LadyWax`,
@@ -45,12 +46,13 @@ export default async function BookingLocationPage({ params }: Props) {
   const { city } = await params;
   const slug = city as CitySlug;
   const configKey = locationMap[slug];
+  const locations = await getLocationsData();
 
-  if (!configKey) {
+  if (!configKey || !locations[configKey as keyof typeof locations]) {
     notFound();
   }
 
-  const location = siteConfig.locations[configKey];
+  const location = locations[configKey as "amsterdam" | "theHague"];
 
   return (
     <div className="min-h-screen bg-secondary-50 pt-32 pb-16 px-4 sm:px-6 lg:px-8">

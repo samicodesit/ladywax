@@ -1,5 +1,5 @@
-import { siteConfig } from "@/app/lib/config";
-import { Mail, Phone, MapPin, Calendar, Clock } from "lucide-react";
+import { getContactPageData, getLocationsData } from "@/app/lib/data";
+import { Mail, Phone, MapPin, Calendar } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
 
@@ -9,8 +9,9 @@ export const metadata: Metadata = {
     "Neem contact op met LadyWax of maak direct een afspraak in Amsterdam of Den Haag.",
 };
 
-export default function ContactPage() {
-  const { title, intro, email } = siteConfig.contactPage;
+export default async function ContactPage() {
+  const { title, intro, email } = await getContactPageData();
+  const locations = await getLocationsData();
 
   return (
     <div className="min-h-screen bg-secondary-50 pt-32 pb-16 px-4 sm:px-6 lg:px-8">
@@ -44,22 +45,22 @@ export default function ContactPage() {
           <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-secondary-100 flex flex-col">
             <div className="bg-secondary-900 p-6 text-white text-center">
               <h2 className="font-serif text-2xl font-bold">
-                {siteConfig.locations.amsterdam.name}
+                {locations.amsterdam.name}
               </h2>
             </div>
             <div className="p-8 flex-1 flex flex-col items-center text-center space-y-4">
               <div className="space-y-2 text-secondary-600 mb-4">
                 <p className="flex items-center justify-center gap-2">
                   <MapPin size={16} className="text-primary-500" />
-                  {siteConfig.locations.amsterdam.address},{" "}
-                  {siteConfig.locations.amsterdam.city}
+                  {locations.amsterdam.address},{" "}
+                  {locations.amsterdam.city}
                 </p>
                 <a
-                  href={`tel:${siteConfig.locations.amsterdam.phone.replace(/\s/g, "")}`}
+                  href={`tel:${locations.amsterdam.phone.replace(/\s/g, "")}`}
                   className="flex items-center justify-center gap-2 hover:text-primary-600 transition-colors"
                 >
                   <Phone size={16} className="text-primary-500" />
-                  {siteConfig.locations.amsterdam.phone}
+                  {locations.amsterdam.phone}
                 </a>
               </div>
 
@@ -77,22 +78,22 @@ export default function ContactPage() {
           <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-secondary-100 flex flex-col">
             <div className="bg-secondary-900 p-6 text-white text-center">
               <h2 className="font-serif text-2xl font-bold">
-                {siteConfig.locations.theHague.name}
+                {locations.theHague.name}
               </h2>
             </div>
             <div className="p-8 flex-1 flex flex-col items-center text-center space-y-4">
               <div className="space-y-2 text-secondary-600 mb-4">
                 <p className="flex items-center justify-center gap-2">
                   <MapPin size={16} className="text-primary-500" />
-                  {siteConfig.locations.theHague.address},{" "}
-                  {siteConfig.locations.theHague.city}
+                  {locations.theHague.address},{" "}
+                  {locations.theHague.city}
                 </p>
                 <a
-                  href={`tel:${siteConfig.locations.theHague.phone.replace(/\s/g, "")}`}
+                  href={`tel:${locations.theHague.phone.replace(/\s/g, "")}`}
                   className="flex items-center justify-center gap-2 hover:text-primary-600 transition-colors"
                 >
                   <Phone size={16} className="text-primary-500" />
-                  {siteConfig.locations.theHague.phone}
+                  {locations.theHague.phone}
                 </a>
               </div>
 

@@ -3,13 +3,17 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { siteConfig } from "@/app/lib/config";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calendar } from "lucide-react";
-
 import Image from "next/image";
+import type { NavigationData, LocationsData } from "@/app/lib/data";
 
-export default function Header() {
+interface HeaderProps {
+  navigation: NavigationData;
+  locations: LocationsData;
+}
+
+export default function Header({ navigation, locations }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -77,9 +81,9 @@ export default function Header() {
       <header
         className="fixed inset-x-0 top-0 z-50 bg-white/95 shadow-lg py-3"
         style={{
-          willChange: 'transform',
-          transform: 'translate3d(0, 0, 0)',
-          WebkitTransform: 'translate3d(0, 0, 0)',
+          willChange: "transform",
+          transform: "translate3d(0, 0, 0)",
+          WebkitTransform: "translate3d(0, 0, 0)",
         }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -102,8 +106,8 @@ export default function Header() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-4 lg:space-x-8">
-              {siteConfig.navigation.map((item) => (
+            <nav className="hidden md:flex items-center space-x-8">
+              {navigation.items.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -169,15 +173,15 @@ export default function Header() {
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className="fixed inset-0 z-40 bg-white pt-24 px-6 pb-8 md:hidden overflow-y-auto flex flex-col"
             style={{
-              height: '100dvh',
-              willChange: 'transform',
-              transform: 'translate3d(0, 0, 0)',
-              WebkitTransform: 'translate3d(0, 0, 0)',
-              WebkitOverflowScrolling: 'touch',
+              height: "100dvh",
+              willChange: "transform",
+              transform: "translate3d(0, 0, 0)",
+              WebkitTransform: "translate3d(0, 0, 0)",
+              WebkitOverflowScrolling: "touch",
             }}
           >
             <div className="flex flex-col flex-grow justify-center space-y-8 text-center pb-12">
-              {siteConfig.navigation.map((item, idx) => (
+              {navigation.items.map((item, idx) => (
                 <motion.div
                   key={item.name}
                   initial={{ opacity: 0, y: 20 }}

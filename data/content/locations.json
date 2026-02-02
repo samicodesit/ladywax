@@ -1,0 +1,20 @@
+{
+  "amsterdam": {
+    "name": "LadyWax Amsterdam",
+    "address": "Overtoom 492",
+    "city": "1054 JZ Amsterdam",
+    "phone": "020 - 751 99 50",
+    "email": "amsterdam@ladywax.nl",
+    "mapsUrl": "https://maps.app.goo.gl/uY67j2QqPTEFAprn8",
+    "widgetUrl": "https://widget.salonized.com/widget?color=%230000f8&language=nl&company=erxSd9nZu9SHfMatd8MuztjX&inline=true"
+  },
+  "theHague": {
+    "name": "LadyWax The Hague",
+    "address": "Zoutmanstraat 2-d",
+    "city": "2518 GP The Hague",
+    "phone": "070 - 752 11 97",
+    "email": "denhaag@ladywax.nl",
+    "mapsUrl": "https://maps.app.goo.gl/H1tWtiUXgbDad4C18",
+    "widgetUrl": "https://widget.salonized.com/widget?color=%230000f8&language=nl&company=AB3KbFZHUS6Q5Phs9PhRRqfY&inline=true"
+  }
+}

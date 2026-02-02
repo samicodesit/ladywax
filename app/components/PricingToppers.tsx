@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { siteConfig } from "../lib/config";
 import ImageCard from "./ImageCard";
 
 const prices = [
@@ -130,11 +129,7 @@ export default function PricingToppers() {
 
               <div className="mt-8 text-center">
                 <Link
-                  href={
-                    siteConfig.navigation.find(
-                      (item) => item.name === "Prijslijst",
-                    )?.href || "#"
-                  }
+                  href="/onze-prijslijst"
                   className="inline-block bg-primary-600 text-white font-bold py-4 px-10 rounded-full shadow-lg shadow-primary-600/30 hover:bg-primary-700 hover:shadow-primary-600/40 transition-all duration-300 transform hover:-translate-y-1 uppercase tracking-wider text-sm w-full sm:w-auto"
                 >
                   Bekijk Volledige Prijslijst

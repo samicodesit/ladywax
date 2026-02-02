@@ -3,8 +3,13 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import ImageCard from "./ImageCard";
+import type { FeaturesData } from "@/app/lib/data";
 
-export default function FeaturesSection() {
+interface FeaturesSectionProps {
+  data: FeaturesData;
+}
+
+export default function FeaturesSection({ data }: FeaturesSectionProps) {
   return (
     <section className="relative py-8 lg:py-24 overflow-hidden bg-white">
       {/* --- Spinning Graphic (Restored) --- */}
@@ -41,12 +46,12 @@ export default function FeaturesSection() {
               transition={{ duration: 0.8 }}
             >
               <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl text-secondary-900 leading-[0.95] tracking-tight mb-2">
-                Comfort <br />
+                {data.title} <br />
                 <span className="italic text-secondary-400 font-light ml-2">
-                  ontmoet
+                  {data.titleAccent}
                 </span>{" "}
                 <br />
-                Kwaliteit.
+                {data.titleBottom}
               </h2>
               <div className="h-1.5 w-24 bg-primary-500 rounded-full mt-8 hidden lg:block" />
             </motion.div>
@@ -60,9 +65,9 @@ export default function FeaturesSection() {
               className="hidden lg:block h-[500px] w-full"
             >
               <ImageCard
-                src="/images/salon-3.png"
+                src={data.image}
                 alt="LadyWax Salon Details"
-                text="De Ontvangstruimte."
+                text={data.imageText}
                 className="h-full"
               />
             </motion.div>
@@ -78,86 +83,34 @@ export default function FeaturesSection() {
               transition={{ duration: 0.8 }}
             >
               <p className="text-xl md:text-2xl text-secondary-800 font-serif leading-relaxed font-light">
-                LadyWax heeft WaxStores{" "}
-                <span className="text-primary-600 font-normal italic decoration-2 underline-offset-4 decoration-primary-200 underline">
-                  exclusief voor vrouwen
-                </span>{" "}
-                en verzorgt zeer professionele waxbehandelingen. Met stores in
-                Amsterdam en Den Haag staan onze gediplomeerde WaxLady's 7 dagen
-                per week voor je klaar.
+                {data.intro}
               </p>
             </motion.div>
 
             {/* Features List */}
             <div className="space-y-12">
-              {/* Feature 1 */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.1 }}
-                className="group pl-8 border-l-2 border-primary-500 lg:border-secondary-100 lg:hover:border-primary-500 transition-colors duration-500"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="text-4xl text-primary-500 lg:text-primary-200 lg:group-hover:text-primary-500 transition-colors font-serif italic font-bold">
-                    01
-                  </span>
-                  <h3 className="text-lg font-bold text-secondary-900 uppercase tracking-widest">
-                    100% Vrouwvriendelijk
-                  </h3>
-                </div>
-                <p className="text-secondary-600 text-lg leading-relaxed">
-                  Onze salons zijn exclusief voor en door vrouwen. In elke kamer
-                  vind je een wastafel met warm water en lactacyd om je rustig
-                  op te frissen.
-                </p>
-              </motion.div>
-
-              {/* Feature 2 */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="group pl-8 border-l-2 border-primary-500 lg:border-secondary-100 lg:hover:border-primary-500 transition-colors duration-500"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="text-4xl text-primary-500 lg:text-primary-200 lg:group-hover:text-primary-500 transition-colors font-serif italic font-bold">
-                    02
-                  </span>
-                  <h3 className="text-lg font-bold text-secondary-900 uppercase tracking-widest">
-                    Gediplomeerde Specialisten
-                  </h3>
-                </div>
-                <p className="text-secondary-600 text-lg leading-relaxed">
-                  Meer dan 25 WaxLady's, intern opgeleid tot absolute experts.
-                  Je mag altijd je eigen vertrouwde WaxLady kiezen die jouw huid
-                  en voorkeuren kent.
-                </p>
-              </motion.div>
-
-              {/* Feature 3 */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="group pl-8 border-l-2 border-primary-500 lg:border-secondary-100 lg:hover:border-primary-500 transition-colors duration-500"
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="text-4xl text-primary-500 lg:text-primary-200 lg:group-hover:text-primary-500 transition-colors font-serif italic font-bold">
-                    03
-                  </span>
-                  <h3 className="text-lg font-bold text-secondary-900 uppercase tracking-widest">
-                    Topkwaliteit Producten
-                  </h3>
-                </div>
-                <p className="text-secondary-600 text-lg leading-relaxed">
-                  Wij werken uitsluitend met de allerbeste producten en
-                  apparatuur van o.a. Lycon en Perron Rigot voor het minst
-                  pijnlijke resultaat.
-                </p>
-              </motion.div>
+              {data.items.map((item, index) => (
+                <motion.div
+                  key={item.number}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.1 + index * 0.1 }}
+                  className="group pl-8 border-l-2 border-primary-500 lg:border-secondary-100 lg:hover:border-primary-500 transition-colors duration-500"
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="text-4xl text-primary-500 lg:text-primary-200 lg:group-hover:text-primary-500 transition-colors font-serif italic font-bold">
+                      {item.number}
+                    </span>
+                    <h3 className="text-lg font-bold text-secondary-900 uppercase tracking-widest">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-secondary-600 text-lg leading-relaxed">
+                    {item.description}
+                  </p>
+                </motion.div>
+              ))}
             </div>
 
             {/* CTA */}
@@ -169,11 +122,11 @@ export default function FeaturesSection() {
               className="mt-4"
             >
               <Link
-                href="/waarom-waxen"
+                href={data.ctaHref}
                 className="group inline-flex items-center gap-3 text-secondary-900 font-bold border-b-2 border-primary-500 pb-1 hover:text-primary-600 transition-colors"
               >
                 <span className="uppercase tracking-widest text-sm">
-                  Waarom Waxen?
+                  {data.ctaText}
                 </span>
                 <svg
                   className="w-5 h-5 transform group-hover:translate-x-2 transition-transform"

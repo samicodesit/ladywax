@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lato } from "next/font/google";
 import "./globals.css";
-import { siteConfig } from "./lib/config";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import ScrollToTop from "./components/ScrollToTop";
+import { getBusinessData } from "./lib/data";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -19,46 +16,50 @@ const lato = Lato({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://www.ladywax.nl"),
-  title: `${siteConfig.name} - ${siteConfig.description}`,
-  description: siteConfig.description,
-  keywords: [
-    "waxing",
-    "ladies only",
-    "Amsterdam",
-    "The Hague",
-    "beauty salon",
-    "hair removal",
-  ],
-  authors: [{ name: siteConfig.name }],
-  openGraph: {
-    title: siteConfig.name,
-    description: siteConfig.description,
-    url: "https://www.ladywax.nl",
-    siteName: siteConfig.name,
-    images: [
-      {
-        url: "/images/logo.png",
-        width: 1200,
-        height: 630,
-        alt: siteConfig.name,
-      },
+export async function generateMetadata(): Promise<Metadata> {
+  const business = await getBusinessData();
+
+  return {
+    metadataBase: new URL("https://www.ladywax.nl"),
+    title: `${business.name} - ${business.description}`,
+    description: business.description,
+    keywords: [
+      "waxing",
+      "ladies only",
+      "Amsterdam",
+      "The Hague",
+      "beauty salon",
+      "hair removal",
     ],
-    type: "website",
-    locale: "nl_NL",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: ["/images/logo.png"],
-  },
-  icons: {
-    icon: "/favico/favicon.ico",
-    apple: "/favico/favicon.ico",
-  },
-};
+    authors: [{ name: business.name }],
+    openGraph: {
+      title: business.name,
+      description: business.description,
+      url: "https://www.ladywax.nl",
+      siteName: business.name,
+      images: [
+        {
+          url: "/images/logo.png",
+          width: 1200,
+          height: 630,
+          alt: business.name,
+        },
+      ],
+      type: "website",
+      locale: "nl_NL",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: business.name,
+      description: business.description,
+      images: ["/images/logo.png"],
+    },
+    icons: {
+      icon: "/favico/favicon.ico",
+      apple: "/favico/favicon.ico",
+    },
+  };
+}
 
 export default function RootLayout({
   children,
@@ -70,10 +71,7 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${lato.variable} antialiased bg-white text-secondary-900 font-sans selection:bg-primary-500 selection:text-white`}
       >
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <ScrollToTop />
+        {children}
       </body>
     </html>
   );

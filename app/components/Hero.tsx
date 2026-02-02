@@ -1,11 +1,16 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { siteConfig } from "@/app/lib/config";
 import Image from "next/image";
 import { useRef } from "react";
+import type { HeroData, LocationsData } from "@/app/lib/data";
 
-export default function Hero() {
+interface HeroProps {
+  data: HeroData;
+  locations?: LocationsData;
+}
+
+export default function Hero({ data, locations }: HeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -53,7 +58,7 @@ export default function Hero() {
         {/* Background Image Container */}
         <div className="absolute inset-0 w-full h-full z-0 bg-white">
           <Image
-            src="/images/inside-salon.png"
+            src={data.image}
             alt="LadyWax Salon Interieur"
             fill
             className="object-cover object-[0%_100%] !top-[-50px]"
@@ -81,7 +86,7 @@ export default function Hero() {
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                 </span>
                 <span className="text-primary-800 text-xs sm:text-sm font-bold tracking-widest uppercase">
-                  7 Dagen Open • 10:00 - 21:00
+                  {data.badge}
                 </span>
               </div>
             </motion.div>
@@ -97,10 +102,10 @@ export default function Hero() {
                 className="text-4xl sm:text-6xl font-bold text-primary-900 mb-4 sm:mb-6 font-serif leading-[1.1]"
               >
                 <span className="text-3xl sm:text-5xl italic">
-                  Speciaal voor Vrouwen
+                  {data.headlineTop}
                 </span>
                 <br />
-                <span className="text-primary-600">Professioneel Waxen.</span>
+                <span className="text-primary-600">{data.headlineBottom}</span>
               </motion.h1>
 
               <motion.p
@@ -109,12 +114,14 @@ export default function Hero() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-base sm:text-xl text-secondary-600 mb-10 max-w-sm sm:max-w-xl mx-auto leading-relaxed font-medium"
               >
-                Ervaar de toonaangevende waxing studio, exclusief voor vrouwen.{" "}
-                <br className="hidden sm:block" />
-                <span className="hidden sm:inline">
-
-                Professionele behandelingen in Amsterdam & Den Haag.
-                </span>
+                {data.subheadline.split(". ").map((sentence, i, arr) => (
+                  <span key={i}>
+                    {sentence}
+                    {i < arr.length - 1 ? "." : ""}
+                    {i === 0 && <br className="hidden sm:block" />}
+                    {i < arr.length - 1 && " "}
+                  </span>
+                ))}
               </motion.p>
             </div>
 
@@ -127,16 +134,18 @@ export default function Hero() {
             >
               {/* Amsterdam Card */}
               <div className="group relative block h-full bg-white rounded-2xl p-4 sm:p-6 border border-primary-100 shadow-lg hover:shadow-xl hover:shadow-primary-100/50 transition-all duration-300 transform hover:-translate-y-1">
-                <a
-                  href={siteConfig.locations.amsterdam.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute -top-2 -right-2 p-2 bg-primary-600 text-white rounded-xl shadow-lg hover:bg-primary-700 hover:scale-105 transition-all z-20"
-                >
-                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                    <path d="M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z" />
-                  </svg>
-                </a>
+                {locations && (
+                  <a
+                    href={locations.amsterdam.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute -top-2 -right-2 p-2 bg-primary-600 text-white rounded-xl shadow-lg hover:bg-primary-700 hover:scale-105 transition-all z-20"
+                  >
+                    <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                      <path d="M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z" />
+                    </svg>
+                  </a>
+                )}
                 <div className="flex flex-col justify-between h-full pt-1">
                   <div
                     onClick={(e) => handleBookClick(e, "amsterdam")}
@@ -148,7 +157,7 @@ export default function Hero() {
                       </h3>
                     </div>
                     <p className="text-xs sm:text-sm text-secondary-600 truncate mb-4 font-medium text-center">
-                      {siteConfig.locations.amsterdam.address}
+                      {locations?.amsterdam.address}
                     </p>
                   </div>
                   <div className="w-full">
@@ -164,16 +173,18 @@ export default function Hero() {
 
               {/* The Hague Card */}
               <div className="group relative block h-full bg-white rounded-2xl p-4 sm:p-6 border border-primary-100 shadow-lg hover:shadow-xl hover:shadow-primary-100/50 transition-all duration-300 transform hover:-translate-y-1">
-                <a
-                  href={siteConfig.locations.theHague.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute -top-2 -right-2 p-2 bg-primary-600 text-white rounded-xl shadow-lg hover:bg-primary-700 hover:scale-105 transition-all z-20"
-                >
-                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                    <path d="M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z" />
-                  </svg>
-                </a>
+                {locations && (
+                  <a
+                    href={locations.theHague.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute -top-2 -right-2 p-2 bg-primary-600 text-white rounded-xl shadow-lg hover:bg-primary-700 hover:scale-105 transition-all z-20"
+                  >
+                    <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                      <path d="M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z" />
+                    </svg>
+                  </a>
+                )}
                 <div className="flex flex-col justify-between h-full pt-1">
                   <div
                     onClick={(e) => handleBookClick(e, "theHague")}
@@ -185,7 +196,7 @@ export default function Hero() {
                       </h3>
                     </div>
                     <p className="text-xs sm:text-sm text-secondary-600 truncate mb-4 font-medium text-center">
-                      {siteConfig.locations.theHague.address}
+                      {locations?.theHague.address}
                     </p>
                   </div>
                   <div className="w-full">
@@ -255,7 +266,7 @@ export default function Hero() {
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                   </span>
                   <span className="text-primary-900 text-xs font-bold tracking-[0.15em] uppercase">
-                    7 Dagen Open • 10:00 - 21:00
+                    {data.badge}
                   </span>
                 </div>
               </motion.div>
@@ -269,10 +280,10 @@ export default function Hero() {
               >
                 <h1 className="font-serif text-[5.5rem] leading-[0.95] text-primary-950 tracking-tight">
                   <span className="block text-primary-900/90 font-medium italic text-[0.6em] mb-4 tracking-normal">
-                    Speciaal voor Vrouwen
+                    {data.headlineTop}
                   </span>
                   <span className="block font-bold bg-clip-text text-transparent bg-gradient-to-br from-primary-900 via-primary-700 to-primary-900">
-                    Professioneel Waxen.
+                    {data.headlineBottom}
                   </span>
                 </h1>
               </motion.div>
@@ -284,8 +295,7 @@ export default function Hero() {
                 transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                 className="text-xl text-secondary-600 mb-10 max-w-lg leading-relaxed font-light"
               >
-                Ervaar de toonaangevende waxing studio, exclusief voor vrouwen.
-                Professionele behandelingen in Amsterdam & Den Haag.
+                {data.subheadline}
               </motion.p>
 
               {/* Cards - Restored Original Style for Desktop */}
@@ -297,16 +307,18 @@ export default function Hero() {
               >
                 {/* Amsterdam Card - Original Style */}
                 <div className="group relative flex-1 bg-white rounded-2xl p-6 border border-primary-100 shadow-lg hover:shadow-xl hover:shadow-primary-100/50 transition-all duration-300 transform hover:-translate-y-1">
-                  <a
-                    href={siteConfig.locations.amsterdam.mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute -top-2 -right-2 p-2 bg-primary-600 text-white rounded-xl shadow-lg hover:bg-primary-700 hover:scale-105 transition-all z-20"
-                  >
-                    <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                      <path d="M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z" />
-                    </svg>
-                  </a>
+                  {locations && (
+                    <a
+                      href={locations.amsterdam.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute -top-2 -right-2 p-2 bg-primary-600 text-white rounded-xl shadow-lg hover:bg-primary-700 hover:scale-105 transition-all z-20"
+                    >
+                      <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z" />
+                      </svg>
+                    </a>
+                  )}
                   <div className="flex flex-col justify-between h-full pt-1">
                     <div
                       onClick={(e) => handleBookClick(e, "amsterdam")}
@@ -318,7 +330,7 @@ export default function Hero() {
                         </h3>
                       </div>
                       <p className="text-secondary-600 truncate mb-4 font-medium text-center text-sm">
-                        {siteConfig.locations.amsterdam.address}
+                        {locations?.amsterdam.address}
                       </p>
                     </div>
                     <div className="w-full">
@@ -334,16 +346,18 @@ export default function Hero() {
 
                 {/* The Hague Card - Original Style */}
                 <div className="group relative flex-1 bg-white rounded-2xl p-6 border border-primary-100 shadow-lg hover:shadow-xl hover:shadow-primary-100/50 transition-all duration-300 transform hover:-translate-y-1">
-                  <a
-                    href={siteConfig.locations.theHague.mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute -top-2 -right-2 p-2 bg-primary-600 text-white rounded-xl shadow-lg hover:bg-primary-700 hover:scale-105 transition-all z-20"
-                  >
-                    <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                      <path d="M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z" />
-                    </svg>
-                  </a>
+                  {locations && (
+                    <a
+                      href={locations.theHague.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute -top-2 -right-2 p-2 bg-primary-600 text-white rounded-xl shadow-lg hover:bg-primary-700 hover:scale-105 transition-all z-20"
+                    >
+                      <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z" />
+                      </svg>
+                    </a>
+                  )}
                   <div className="flex flex-col justify-between h-full pt-1">
                     <div
                       onClick={(e) => handleBookClick(e, "theHague")}
@@ -355,7 +369,7 @@ export default function Hero() {
                         </h3>
                       </div>
                       <p className="text-secondary-600 truncate mb-4 font-medium text-center text-sm">
-                        {siteConfig.locations.theHague.address}
+                        {locations?.theHague.address}
                       </p>
                     </div>
                     <div className="w-full">
@@ -400,7 +414,7 @@ export default function Hero() {
               >
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary-900/10 to-transparent mix-blend-overlay z-10 pointer-events-none" />
                 <Image
-                  src="/images/inside-salon.png"
+                  src={data.image}
                   alt="LadyWax Salon Interieur"
                   fill
                   className="object-cover object-left"
@@ -438,11 +452,12 @@ export default function Hero() {
                     </svg>
                     {/* <span className="text-yellow-500 text-sm">★★★★★</span> */}
                     <span className="font-bold text-primary-900 text-sm">
-                      Gecertificeerde Specialisten
+                      {data.floatingBadge?.title ||
+                        "Gecertificeerde Specialisten"}
                     </span>
                   </div>
                   <p className="text-xs text-secondary-600 font-medium">
-                    Veilig & Hygiënisch
+                    {data.floatingBadge?.subtitle || "Veilig & Hygiënisch"}
                   </p>
                 </div>
               </motion.div>

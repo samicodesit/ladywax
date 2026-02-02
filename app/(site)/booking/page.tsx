@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { MapPin, ArrowRight } from "lucide-react";
-import { siteConfig } from "@/app/lib/config";
 
 export default function BookingSelectionPage() {
   return (
@@ -36,7 +35,7 @@ export default function BookingSelectionPage() {
                 Amsterdam
               </h3>
               <p className="text-secondary-500 mb-6 text-sm">
-                {siteConfig.locations.amsterdam.address}
+                Overtoom 492
               </p>
               <span className="mt-auto inline-flex items-center gap-2 font-bold text-primary-600 group-hover:gap-3 transition-all">
                 Book Now <ArrowRight size={18} />
@@ -59,7 +58,7 @@ export default function BookingSelectionPage() {
                 The Hague
               </h3>
               <p className="text-secondary-500 mb-6 text-sm">
-                {siteConfig.locations.theHague.address}
+                Zoutmanstraat 2-d
               </p>
               <span className="mt-auto inline-flex items-center gap-2 font-bold text-primary-600 group-hover:gap-3 transition-all">
                 Book Now <ArrowRight size={18} />

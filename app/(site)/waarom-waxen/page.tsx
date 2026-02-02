@@ -1,15 +1,18 @@
-import { siteConfig } from "@/app/lib/config";
+import { getWaxingPageData } from "@/app/lib/data";
 import { Check, X, HelpCircle, Info } from "lucide-react";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Waarom Waxen? - LadyWax",
-  description: siteConfig.waxingPage.subtitle,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await getWaxingPageData();
+  return {
+    title: `${data.title} - LadyWax`,
+    description: data.subtitle,
+  };
+}
 
-export default function WaxingPage() {
+export default async function WaxingPage() {
   const { title, subtitle, intro, brazilian, faq, dosAndDonts } =
-    siteConfig.waxingPage;
+    await getWaxingPageData();
 
   return (
     <div className="min-h-screen bg-secondary-50 pt-32 pb-16 px-4 sm:px-6 lg:px-8">
@@ -95,7 +98,7 @@ export default function WaxingPage() {
 
         {/* Dos and Donts Grid */}
         <section className="grid md:grid-cols-2 gap-8">
-          {/* Do's */}
+          {/* Do&apos;s */}
           <div className="bg-white rounded-2xl p-8 shadow-sm border-t-4 border-green-500">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
@@ -118,7 +121,7 @@ export default function WaxingPage() {
             </ul>
           </div>
 
-          {/* Don'ts */}
+          {/* Don&apos;ts */}
           <div className="bg-white rounded-2xl p-8 shadow-sm border-t-4 border-red-500">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">

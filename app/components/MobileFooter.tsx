@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { siteConfig } from "@/app/lib/config";
+import type { NavigationData, LocationsData, BusinessData } from "@/app/lib/data";
 import {
   Facebook,
   Instagram,
@@ -15,7 +15,13 @@ import {
   Calendar,
 } from "lucide-react";
 
-export default function MobileFooter() {
+interface MobileFooterProps {
+  navigation: NavigationData;
+  locations: LocationsData;
+  business: BusinessData;
+}
+
+export default function MobileFooter({ navigation, locations, business }: MobileFooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -28,13 +34,13 @@ export default function MobileFooter() {
         <Link href="/" className="relative w-32 h-10 mb-3">
           <Image
             src="/images/logo.png"
-            alt={siteConfig.name}
+            alt={business.name}
             fill
             className="object-contain"
           />
         </Link>
         <p className="text-sm text-secondary-500 italic">
-          {siteConfig.business.tagline}
+          {business.tagline}
         </p>
       </div>
       {/* Quick Links (Grid) */}
@@ -43,7 +49,7 @@ export default function MobileFooter() {
           Menu
         </h3>
         <div className="grid grid-cols-2 gap-y-3 gap-x-4 text-sm text-left">
-          {siteConfig.navigation.map((item) => (
+          {navigation.items.map((item) => (
             <Link
               key={item.name}
               href={item.href}
@@ -76,10 +82,10 @@ export default function MobileFooter() {
             <span className="font-bold text-sm">Opening Times</span>
           </div>
           <p className="text-xs text-secondary-500">
-            {siteConfig.business.openDays}
+            {business.openDays}
           </p>
           <p className="text-sm font-medium text-secondary-800">
-            {siteConfig.business.openingHours}
+            {business.openingHours}
           </p>
         </div>
 
@@ -90,20 +96,20 @@ export default function MobileFooter() {
           {/* Amsterdam */}
           <div className="text-left">
             <h4 className="font-bold text-secondary-900 text-sm mb-1">
-              {siteConfig.locations.amsterdam.name}
+              {locations.amsterdam.name}
             </h4>
             <div className="flex items-center justify-between text-sm">
               <a
-                href={`tel:${siteConfig.locations.amsterdam.phone.replace(/\s/g, "")}`}
+                href={`tel:${locations.amsterdam.phone.replace(/\s/g, "")}`}
                 className="flex items-center gap-2 text-secondary-600"
               >
                 <Phone size={14} className="text-primary-500" />
                 <span className="text-xs">
-                  {siteConfig.locations.amsterdam.phone}
+                  {locations.amsterdam.phone}
                 </span>
               </a>
               <a
-                href={siteConfig.locations.amsterdam.mapsUrl}
+                href={locations.amsterdam.mapsUrl}
                 target="_blank"
                 className="text-primary-600 text-xs font-medium"
               >
@@ -112,7 +118,7 @@ export default function MobileFooter() {
             </div>
             <div className="mt-3">
               <a
-                href={siteConfig.locations.amsterdam.widgetUrl}
+                href={locations.amsterdam.widgetUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-full bg-primary-600 text-white text-xs font-bold py-2.5 rounded-lg shadow-sm hover:bg-primary-700 active:scale-95 transition-all gap-2"
@@ -126,20 +132,20 @@ export default function MobileFooter() {
           {/* The Hague */}
           <div className="text-left pt-2 border-t border-secondary-50">
             <h4 className="font-bold text-secondary-900 text-sm mb-1">
-              {siteConfig.locations.theHague.name}
+              {locations.theHague.name}
             </h4>
             <div className="flex items-center justify-between text-sm">
               <a
-                href={`tel:${siteConfig.locations.theHague.phone.replace(/\s/g, "")}`}
+                href={`tel:${locations.theHague.phone.replace(/\s/g, "")}`}
                 className="flex items-center gap-2 text-secondary-600"
               >
                 <Phone size={14} className="text-primary-500" />
                 <span className="text-xs">
-                  {siteConfig.locations.theHague.phone}
+                  {locations.theHague.phone}
                 </span>
               </a>
               <a
-                href={siteConfig.locations.theHague.mapsUrl}
+                href={locations.theHague.mapsUrl}
                 target="_blank"
                 className="text-primary-600 text-xs font-medium"
               >
@@ -148,7 +154,7 @@ export default function MobileFooter() {
             </div>
             <div className="mt-3">
               <a
-                href={siteConfig.locations.theHague.widgetUrl}
+                href={locations.theHague.widgetUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-full bg-primary-600 text-white text-xs font-bold py-2.5 rounded-lg shadow-sm hover:bg-primary-700 active:scale-95 transition-all gap-2"
@@ -163,7 +169,7 @@ export default function MobileFooter() {
 
       {/* Copyright */}
       <p className="text-xs text-secondary-400">
-        © {currentYear} {siteConfig.name}. All rights reserved.
+        © {currentYear} {business.name}. All rights reserved.
       </p>
 
       <div className="flex items-center gap-2 text-center justify-center mt-2">

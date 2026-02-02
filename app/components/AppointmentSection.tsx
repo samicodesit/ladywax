@@ -2,9 +2,13 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { siteConfig } from "@/app/lib/config";
+import type { LocationsData } from "@/app/lib/data";
 
-export default function AppointmentSection() {
+interface AppointmentSectionProps {
+  locations: LocationsData;
+}
+
+export default function AppointmentSection({ locations }: AppointmentSectionProps) {
   const [selectedLocation, setSelectedLocation] = useState<
     "amsterdam" | "theHague"
   >("amsterdam");
@@ -39,8 +43,8 @@ export default function AppointmentSection() {
 
   const widgetUrl =
     selectedLocation === "amsterdam"
-      ? siteConfig.locations.amsterdam.widgetUrl
-      : siteConfig.locations.theHague.widgetUrl;
+      ? locations.amsterdam.widgetUrl
+      : locations.theHague.widgetUrl;
 
   return (
     <section
@@ -133,8 +137,8 @@ export default function AppointmentSection() {
                   <span className="text-secondary-400 text-sm ml-2 hidden sm:inline">
                     |{" "}
                     {selectedLocation === "amsterdam"
-                      ? siteConfig.locations.amsterdam.address
-                      : siteConfig.locations.theHague.address}
+                      ? locations.amsterdam.address
+                      : locations.theHague.address}
                   </span>
                 </div>
               </div>

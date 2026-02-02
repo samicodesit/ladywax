@@ -1,0 +1,9 @@
+{
+  "items": [
+    { "name": "Home", "href": "/" },
+    { "name": "Prijslijst", "href": "/onze-prijslijst" },
+    { "name": "Waxen?", "href": "/waarom-waxen" },
+    { "name": "Vacatures", "href": "/kom-bij-ons-werken" },
+    { "name": "Contact", "href": "/contact-opnemen" }
+  ]
+}

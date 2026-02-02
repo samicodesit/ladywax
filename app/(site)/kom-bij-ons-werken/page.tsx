@@ -1,4 +1,4 @@
-import { siteConfig } from "@/app/lib/config";
+import { getCareersPageData } from "@/app/lib/data";
 import { Mail, Heart } from "lucide-react";
 import { Metadata } from "next";
 
@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "Werken bij LadyWax? Bekijk onze vacatures en groeimogelijkheden.",
 };
 
-export default function CareersPage() {
-  const { title, content, email } = siteConfig.careersPage;
+export default async function CareersPage() {
+  const { title, content, email } = await getCareersPageData();
 
   return (
     <div className="min-h-screen bg-secondary-50 pt-32 pb-16 px-4 sm:px-6 lg:px-8">
@@ -30,11 +30,11 @@ export default function CareersPage() {
           <div className="prose prose-lg prose-secondary max-w-none text-secondary-700 space-y-6 relative z-10">
             {content.map((paragraph, index) => (
               <p key={index} className="leading-relaxed">
-                {paragraph.split(/(violier@ladywax\.nl)/g).map((part, i) =>
-                  part === "violier@ladywax.nl" ? (
+                {paragraph.split(new RegExp(`(${email})`, "g")).map((part, i) =>
+                  part === email ? (
                     <a
                       key={i}
-                      href="mailto:violier@ladywax.nl"
+                      href={`mailto:${email}`}
                       className="text-primary-600 font-bold hover:underline"
                     >
                       {part}
