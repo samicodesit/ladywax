@@ -223,15 +223,20 @@ export async function writeToEdgeConfig<T>(key: string, data: T): Promise<void> 
   let id = process.env.EDGE_CONFIG_ID;
 
   // If no separate token, try to extract from EDGE_CONFIG connection string
-  if (!token && process.env.EDGE_CONFIG) {
-    const match = process.env.EDGE_CONFIG.match(/token=([^&]+)/);
-    if (match) token = match[1];
-    const idMatch = process.env.EDGE_CONFIG.match(/ecfg_[^?]+/);
-    if (idMatch && !id) id = idMatch[0];
+  if ((!token || !id) && process.env.EDGE_CONFIG) {
+    const connectionString = process.env.EDGE_CONFIG;
+
+    // Extract token from query param
+    const tokenMatch = connectionString.match(/[?&]token=([^&]+)/);
+    if (!token && tokenMatch) token = tokenMatch[1];
+
+    // Extract ID from path (format: ecfg_xxxx)
+    const idMatch = connectionString.match(/(ecfg_[a-zA-Z0-9]+)/);
+    if (!id && idMatch) id = idMatch[1];
   }
 
   if (!token || !id) {
-    throw new Error("EDGE_CONFIG_TOKEN and EDGE_CONFIG_ID must be set");
+    throw new Error(`EDGE_CONFIG_TOKEN and EDGE_CONFIG_ID must be set. Got token: ${token ? 'yes' : 'no'}, id: ${id ? 'yes' : 'no'}`);
   }
 
   const response = await fetch(
