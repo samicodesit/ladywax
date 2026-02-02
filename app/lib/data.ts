@@ -219,8 +219,16 @@ export async function getContactPageData(): Promise<ContactPageData> {
 
 // Write data (for admin panel via API)
 export async function writeToEdgeConfig<T>(key: string, data: T): Promise<void> {
-  const token = process.env.EDGE_CONFIG_TOKEN;
-  const id = process.env.EDGE_CONFIG_ID;
+  let token = process.env.EDGE_CONFIG_TOKEN;
+  let id = process.env.EDGE_CONFIG_ID;
+
+  // If no separate token, try to extract from EDGE_CONFIG connection string
+  if (!token && process.env.EDGE_CONFIG) {
+    const match = process.env.EDGE_CONFIG.match(/token=([^&]+)/);
+    if (match) token = match[1];
+    const idMatch = process.env.EDGE_CONFIG.match(/ecfg_[^?]+/);
+    if (idMatch && !id) id = idMatch[0];
+  }
 
   if (!token || !id) {
     throw new Error("EDGE_CONFIG_TOKEN and EDGE_CONFIG_ID must be set");
