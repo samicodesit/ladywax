@@ -1,0 +1,77 @@
+{
+  "categories": [
+    {
+      "title": "Brazilian",
+      "items": [
+        { "name": "Full Brazilian", "price": "48,00" },
+        { "name": "Brazilian Shape", "price": "48,00" },
+        { "name": "Brazilian String", "price": "37,50" },
+        { "name": "Bikinilijn", "price": "23,00" },
+        {
+          "name": "DISCOUNT Brazilian",
+          "price": "40,00",
+          "note": "Alleen op maandag t/m vrijdag tussen 13.00 en 16.00. ALLEEN VIA LADYWAX.NL",
+          "isSpecial": true
+        },
+        { "name": "Schaamlippen", "price": "24,50" },
+        { "name": "Bilnaad incl. gaatje", "price": "11,50" },
+        { "name": "Billen Incl. gaatje", "price": "23,50" },
+        { "name": "Billen Excl. Gaatje", "price": "19,00" }
+      ]
+    },
+    {
+      "title": "Bovenlichaam",
+      "items": [
+        { "name": "Oksels", "price": "20,50" },
+        { "name": "Onderarmen (+ handen)", "price": "25,50" },
+        { "name": "Handen", "price": "12,00" },
+        { "name": "Navellijn", "price": "12,00" },
+        { "name": "Onderrug", "price": "17,00" },
+        { "name": "Hele rug", "price": "33,50" },
+        { "name": "Bovenarmen incl. ellebogen", "price": "22,50" },
+        { "name": "Halve bovenbenen excl. Knieën", "price": "20,00" },
+        { "name": "Boven-rug", "price": "20,50" },
+        { "name": "Buik incl. navellijn", "price": "23,00" },
+        { "name": "Borst incl tepelhaar", "price": "17,50" },
+        { "name": "Tepelhaar (met pincet)", "price": "9,00" }
+      ]
+    },
+    {
+      "title": "Onderlichaam",
+      "items": [
+        { "name": "Onderbenen (+ knieën & voeten)", "price": "30,50" },
+        { "name": "Bovenbenen (+knieën )", "price": "32,00" },
+        { "name": "Hele benen (+ voeten)", "price": "47,00" },
+        { "name": "Voeten", "price": "12,00" }
+      ]
+    },
+    {
+      "title": "Gezicht",
+      "items": [
+        { "name": "Voorhoofd", "price": "12,00" },
+        { "name": "Wenkbrauwen", "price": "21,00" },
+        { "name": "Bovenlip", "price": "9,50" },
+        { "name": "Bakkebaarden", "price": "9,50" },
+        { "name": "Hele gezicht (ex wenkbrauwen)", "price": "27,00" },
+        { "name": "Hele gezicht (+ wenkbrauwen)", "price": "46,50" },
+        { "name": "Kaaklijn", "price": "12,50" },
+        { "name": "Wangen", "price": "12,50" },
+        { "name": "Kin", "price": "10,50" },
+        { "name": "Nek", "price": "14,50" },
+        { "name": "Hals", "price": "12,00" },
+        { "name": "Neus", "price": "9,50" }
+      ]
+    },
+    {
+      "title": "Zwangerschap",
+      "items": [
+        { "name": "ZWANGERSCHAP Full Brazilian", "price": "48,00" },
+        { "name": "ZWANGERSCHAP Onderbenen incl. voeten", "price": "30,50" },
+        { "name": "ZWANGERSCHAP hele benen incl. voeten", "price": "47,00" },
+        { "name": "ZWANGERSCHAP Billen Incl. gaatje", "price": "23,50" },
+        { "name": "ZWANGERSCHAP onderrug", "price": "17,00" },
+        { "name": "ZWANGERSCHAP hele rug", "price": "33,50" }
+      ]
+    }
+  ]
+}

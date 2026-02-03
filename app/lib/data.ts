@@ -114,6 +114,36 @@ export interface ContactPageData {
   email: string;
 }
 
+export interface PricingItem {
+  name: string;
+  price: string;
+  note?: string;
+  isSpecial?: boolean;
+}
+
+export interface PricingCategory {
+  title: string;
+  items: PricingItem[];
+}
+
+export interface PricesData {
+  categories: PricingCategory[];
+}
+
+export interface PriceTopperItem {
+  name: string;
+  price: string;
+}
+
+export interface PriceToppersData {
+  items: PriceTopperItem[];
+  specialOffer: {
+    title: string;
+    description: string;
+    price: string;
+  };
+}
+
 // Check if Edge Config is available
 function isEdgeConfigAvailable(): boolean {
   return !!process.env.EDGE_CONFIG;
@@ -251,6 +281,32 @@ export async function getContactPageData(): Promise<ContactPageData> {
     }
   }
   return readJsonFile<ContactPageData>("contact-page.json");
+}
+
+export async function getPricesData(): Promise<PricesData> {
+  if (isEdgeConfigAvailable()) {
+    try {
+      const client = getEdgeConfigClient();
+      const data = await client.get<PricesData>("prices");
+      if (data) return data;
+    } catch {
+      // Fall through to JSON
+    }
+  }
+  return readJsonFile<PricesData>("prices.json");
+}
+
+export async function getPriceToppersData(): Promise<PriceToppersData> {
+  if (isEdgeConfigAvailable()) {
+    try {
+      const client = getEdgeConfigClient();
+      const data = await client.get<PriceToppersData>("price-toppers");
+      if (data) return data;
+    } catch {
+      // Fall through to JSON
+    }
+  }
+  return readJsonFile<PriceToppersData>("price-toppers.json");
 }
 
 // Write data to Edge Config using Vercel API

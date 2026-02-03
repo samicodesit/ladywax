@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 
@@ -8,6 +8,8 @@ const menuItems = [
   { href: "/admin/dashboard", label: "Dashboard", icon: "🏠" },
   { href: "/admin/dashboard/business", label: "Business Info", icon: "🏢" },
   { href: "/admin/dashboard/locations", label: "Locations", icon: "📍" },
+  { href: "/admin/dashboard/prices", label: "Prices", icon: "€" },
+  { href: "/admin/dashboard/price-toppers", label: "Price Toppers", icon: "⭐" },
   { href: "/admin/dashboard/hero", label: "Hero Section", icon: "🖼️" },
   { href: "/admin/dashboard/features", label: "Features", icon: "✨" },
   { href: "/admin/dashboard/highlights", label: "Highlights", icon: "🌟" },
@@ -25,6 +27,24 @@ export default function DashboardLayout({
   const router = useRouter();
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+      if (window.innerWidth < 1024) {
+        setIsSidebarOpen(false);
+      } else {
+        setIsSidebarOpen(true);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleLogout = async () => {
     await fetch("/api/auth", {
@@ -36,22 +56,48 @@ export default function DashboardLayout({
     router.refresh();
   };
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex">
+      {/* Mobile Hamburger Button */}
+      <button
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        className="lg:hidden fixed top-4 left-4 z-50 w-14 h-14 bg-white rounded-full shadow-lg flex items-center justify-center border border-gray-200"
+        aria-label="Toggle menu"
+      >
+        <span className="text-2xl">{isMobileMenuOpen ? "✕" : "☰"}</span>
+      </button>
+
+      {/* Backdrop Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={closeMobileMenu}
+        />
+      )}
+
       {/* Sidebar */}
       <aside
-        className={`bg-white shadow-lg transition-all duration-300 flex flex-col h-screen sticky top-0 ${
-          isSidebarOpen ? "w-64" : "w-20"
-        }`}
+        className={`
+          bg-white shadow-lg transition-all duration-300 flex flex-col h-screen
+          ${isMobile
+            ? `fixed inset-y-0 left-0 z-50 w-72 transform ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`
+            : `sticky top-0 ${isSidebarOpen ? "w-64" : "w-20"}`
+          }
+        `}
       >
         <div className="p-4 border-b flex-shrink-0">
           <Link
             href="/admin/dashboard"
             className={`font-bold text-xl text-blue-600 ${
-              !isSidebarOpen && "text-center block"
+              !isSidebarOpen && !isMobile && "text-center block"
             }`}
+            onClick={closeMobileMenu}
           >
-            {isSidebarOpen ? "LadyWax Admin" : "LW"}
+            {isMobile || isSidebarOpen ? "LadyWax Admin" : "LW"}
           </Link>
         </div>
 
@@ -62,40 +108,45 @@ export default function DashboardLayout({
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${
+                onClick={closeMobileMenu}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition min-h-[48px] ${
                   isActive
                     ? "bg-blue-50 text-blue-700"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
               >
                 <span className="text-xl">{item.icon}</span>
-                {isSidebarOpen && <span className="font-medium">{item.label}</span>}
+                {(isMobile || isSidebarOpen) && (
+                  <span className="font-medium">{item.label}</span>
+                )}
               </Link>
             );
           })}
         </nav>
 
         <div className="p-4 border-t bg-white flex-shrink-0">
-          <button
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition"
-          >
-            <span>{isSidebarOpen ? "←" : "→"}</span>
-            {isSidebarOpen && <span>Collapse</span>}
-          </button>
+          {!isMobile && (
+            <button
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg transition min-h-[44px]"
+            >
+              <span>{isSidebarOpen ? "←" : "→"}</span>
+              {isSidebarOpen && <span>Collapse</span>}
+            </button>
+          )}
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 mt-2 text-red-600 hover:bg-red-50 rounded-lg transition"
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 mt-2 text-red-600 hover:bg-red-50 rounded-lg transition min-h-[44px]"
           >
             <span>🚪</span>
-            {isSidebarOpen && <span>Logout</span>}
+            {(isMobile || isSidebarOpen) && <span>Logout</span>}
           </button>
         </div>
       </aside>
 
       {/* Main content */}
       <main className="flex-1 overflow-auto">
-        <div className="p-8">{children}</div>
+        <div className="p-4 md:p-5 lg:p-8 pt-20 lg:pt-8">{children}</div>
       </main>
     </div>
   );

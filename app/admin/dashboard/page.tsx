@@ -16,6 +16,18 @@ const sections = [
     icon: "📍",
   },
   {
+    title: "Prices",
+    description: "Manage the full price list for all treatments",
+    href: "/admin/dashboard/prices",
+    icon: "€",
+  },
+  {
+    title: "Price Toppers",
+    description: "Update the 4 popular treatments on the homepage",
+    href: "/admin/dashboard/price-toppers",
+    icon: "⭐",
+  },
+  {
     title: "Hero Section",
     description: "Edit homepage hero text and main image",
     href: "/admin/dashboard/hero",
@@ -62,24 +74,24 @@ const sections = [
 export default function Dashboard() {
   return (
     <div>
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">Dashboard</h1>
-      <p className="text-gray-600 mb-8">
+      <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Dashboard</h1>
+      <p className="text-gray-600 mb-6 md:mb-8">
         Welcome to the LadyWax admin panel. Select a section to edit.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
         {sections.map((section) => (
           <Link
             key={section.href}
             href={section.href}
-            className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md hover:border-blue-300 transition group"
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 md:p-5 lg:p-6 hover:shadow-md hover:border-blue-300 transition group"
           >
             <div className="flex items-start gap-4">
-              <span className="text-4xl group-hover:scale-110 transition">
+              <span className="text-3xl md:text-4xl group-hover:scale-110 transition">
                 {section.icon}
               </span>
               <div>
-                <h2 className="text-lg font-semibold text-gray-900 mb-1">
+                <h2 className="text-base md:text-lg font-semibold text-gray-900 mb-1">
                   {section.title}
                 </h2>
                 <p className="text-sm text-gray-600">{section.description}</p>

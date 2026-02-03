@@ -138,3 +138,7 @@ Page sections are components that compose the landing page:
 ## Build Output
 
 Static export not configured. Production builds run as Node.js server with `npm start`.
+
+## General advice
+
+Always update this file with your most recent learnings so it's always up to date!

@@ -10,6 +10,8 @@ import {
   getWaxingPageData,
   getCareersPageData,
   getContactPageData,
+  getPricesData,
+  getPriceToppersData,
   writeToEdgeConfig,
 } from "@/app/lib/data";
 
@@ -26,6 +28,8 @@ const validFiles = [
   "waxing-page",
   "careers-page",
   "contact-page",
+  "prices",
+  "price-toppers",
 ];
 
 // Map file names to getter functions
@@ -39,6 +43,8 @@ const fileGetters: Record<string, () => Promise<unknown>> = {
   "waxing-page": getWaxingPageData,
   "careers-page": getCareersPageData,
   "contact-page": getContactPageData,
+  prices: getPricesData,
+  "price-toppers": getPriceToppersData,
 };
 
 // Check if user is authenticated

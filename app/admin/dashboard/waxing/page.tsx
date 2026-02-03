@@ -66,13 +66,13 @@ export default function WaxingPage() {
     }
   };
 
-  if (!data) return <div className="p-8">Loading...</div>;
+  if (!data) return <div className="p-4 md:p-5 lg:p-6">Loading...</div>;
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Waxing Page</h1>
+      <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Waxing Page</h1>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 max-w-2xl">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 md:p-5 lg:p-6 max-w-full lg:max-w-2xl">
         <div className="space-y-6">
           <TextInput
             label="Page Title"

@@ -4,14 +4,42 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import ImageCard from "./ImageCard";
 
-const prices = [
-  { name: "Brazilian (Full of Shape)", price: "48,00" },
-  { name: "Oksels", price: "20,50" },
-  { name: "Onderbenen", price: "30,50" },
-  { name: "Wenkbrauwen", price: "21,00" },
-];
+interface PriceTopperItem {
+  name: string;
+  price: string;
+}
 
-export default function PricingToppers() {
+interface PriceToppersData {
+  items: PriceTopperItem[];
+  specialOffer: {
+    title: string;
+    description: string;
+    price: string;
+  };
+}
+
+interface PricingToppersProps {
+  data?: PriceToppersData;
+}
+
+// Default data as fallback
+const defaultData: PriceToppersData = {
+  items: [
+    { name: "Brazilian (Full of Shape)", price: "48,00" },
+    { name: "Oksels", price: "20,50" },
+    { name: "Onderbenen", price: "30,50" },
+    { name: "Wenkbrauwen", price: "21,00" },
+  ],
+  specialOffer: {
+    title: "Brazilian Korting",
+    description: "Maandag – Vrijdag, 13:00 – 16:00. Alleen via ladywax.nl",
+    price: "40,00",
+  },
+};
+
+export default function PricingToppers({ data = defaultData }: PricingToppersProps) {
+  const { items, specialOffer } = data;
+
   return (
     <section className="bg-secondary-50 pt-4 pb-12 sm:pt-8 sm:pb-16 lg:py-24 relative z-10 overflow-hidden">
       {/* Decorative Background Elements */}
@@ -64,22 +92,6 @@ export default function PricingToppers() {
                 Ontdek waarom duizenden vrouwen voor LadyWax kiezen.
                 Transparante prijzen, professionele zorg en het beste resultaat.
               </p>
-
-              {/* Decorative detail (Desktop only) */}
-              {/* <div className="hidden lg:flex items-center gap-4 text-sm font-medium text-secondary-500">
-                <div className="flex -space-x-2">
-                  <div className="w-8 h-8 rounded-full bg-primary-100 border-2 border-white flex items-center justify-center text-xs">
-                    ★
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-primary-200 border-2 border-white flex items-center justify-center text-xs">
-                    ★
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-primary-300 border-2 border-white flex items-center justify-center text-xs">
-                    ★
-                  </div>
-                </div>
-                <span>Beoordeeld met 4.9/5</span>
-              </div> */}
             </motion.div>
 
             {/* Pricing Card */}
@@ -91,7 +103,7 @@ export default function PricingToppers() {
               className="w-full max-w-md mx-auto lg:max-w-none lg:mx-0 bg-white rounded-2xl p-6 md:p-8 shadow-xl shadow-secondary-200/50 border border-white ring-1 ring-secondary-50"
             >
               <ul className="space-y-4 md:space-y-5">
-                {prices.map((item, index) => (
+                {items.map((item, index) => (
                   <li
                     key={index}
                     className="flex items-center justify-between text-secondary-700"
@@ -113,15 +125,18 @@ export default function PricingToppers() {
                   <div className="flex justify-between items-start gap-4 relative z-10">
                     <div className="text-xs sm:text-sm text-secondary-600 leading-relaxed">
                       <span className="font-bold text-primary-800 block mb-1 text-base">
-                        Brazilian Korting
+                        {specialOffer.title}
                       </span>
-                      Maandag – Vrijdag, 13:00 – 16:00. <br />
-                      <span className="italic opacity-80">
-                        Alleen via ladywax.nl
-                      </span>
+                      {specialOffer.description.split(". ").map((part, i, arr) => (
+                        <span key={i}>
+                          {part}
+                          {i < arr.length - 1 ? ". " : ""}
+                          {i === arr.length - 2 && <br />}
+                        </span>
+                      ))}
                     </div>
-                    <span className="font-bold text-primary-700 text-lg">
-                      €40,00
+                    <span className="font-bold text-primary-700 text-lg whitespace-nowrap">
+                      €{specialOffer.price}
                     </span>
                   </div>
                 </div>

@@ -37,7 +37,7 @@ export default function ArrayEditor({
       <label className="block text-sm font-medium text-gray-700 mb-2">
         {label}
       </label>
-      <div className="space-y-4">
+      <div className="space-y-6">
         {items.map((item, index) => (
           <div
             key={index}

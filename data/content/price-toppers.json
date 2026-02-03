@@ -1,0 +1,13 @@
+{
+  "items": [
+    { "name": "Brazilian (Full of Shape)", "price": "48,00" },
+    { "name": "Oksels", "price": "20,50" },
+    { "name": "Onderbenen", "price": "30,50" },
+    { "name": "Wenkbrauwen", "price": "21,00" }
+  ],
+  "specialOffer": {
+    "title": "Brazilian Korting",
+    "description": "Maandag – Vrijdag, 13:00 – 16:00. Alleen via ladywax.nl",
+    "price": "40,00"
+  }
+}

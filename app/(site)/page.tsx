@@ -9,21 +9,23 @@ import {
   getFeaturesData,
   getLocationsData,
   getHighlightsData,
+  getPriceToppersData,
 } from "../lib/data";
 
 export default async function Home() {
-  const [heroData, featuresData, locationsData, highlightsData] =
+  const [heroData, featuresData, locationsData, highlightsData, priceToppersData] =
     await Promise.all([
       getHeroData(),
       getFeaturesData(),
       getLocationsData(),
       getHighlightsData(),
+      getPriceToppersData(),
     ]);
 
   return (
     <>
       <Hero data={heroData} locations={locationsData} />
-      <PricingToppers />
+      <PricingToppers data={priceToppersData} />
       <FeaturesSection data={featuresData} />
       <LocationsSection data={locationsData} highlights={highlightsData} />
       <TestimonialsSection />
